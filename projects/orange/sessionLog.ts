@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { randomUUID } from 'node:crypto';
 
 // Журнал session id за один прогон: тесты пишут сюда свои значения, after-run.ts потом
 // сверяет их между собой. Лежит в проекте, а не в core: только Orange знает про этот cookie
@@ -7,7 +8,9 @@ import path from 'node:path';
 
 /** Что запомнили про один вход: под каким аккаунтом и какой session id выдал сайт. */
 export interface SessionRecord {
-  case_id: string;
+  recordId: string;         // Уникальный id записи. Им же помечен результат теста в Allure.
+  case_id: string;          // Номер строки CSV.
+  iteration: number;        // Номер повтора прогона (при repeats > 1 одна строка идёт несколько раз).
   login: string;
   password: string;
   sessionId: string | null; // null — вход не удался, cookie не появился.
@@ -21,13 +24,22 @@ function directory(): string {
 }
 
 /**
- * Дописывает одну запись.
+ * Дописывает одну запись и возвращает её id.
+ *
+ * Тест должен поставить этот id меткой на свой результат в Allure (см. login-form.spec.ts) —
+ * по нему after-run.ts найдёт именно этот тест, если его session id совпадёт с другим.
  *
  * Каждый процесс пишет в свой файл (по pid) — тот же приём, что и в core/events.ts.
  * Так параллельные тесты не перетирают записи друг друга и результат не «съезжает».
  */
-export function appendSessionRecord(record: SessionRecord): void {
-  fs.appendFileSync(path.join(directory(), `${process.pid}.jsonl`), JSON.stringify(record) + '\n');
+export function appendSessionRecord(record: Pick<SessionRecord, 'case_id' | 'login' | 'password' | 'sessionId'>): string {
+  const full: SessionRecord = {
+    recordId: randomUUID(),
+    iteration: Number(process.env.QA_ITERATION || 0),
+    ...record,
+  };
+  fs.appendFileSync(path.join(directory(), `${process.pid}.jsonl`), JSON.stringify(full) + '\n');
+  return full.recordId;
 }
 
 /** Читает записи всех процессов. Вызывать только после того, как тесты завершились. */

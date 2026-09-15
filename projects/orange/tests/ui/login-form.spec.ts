@@ -82,9 +82,12 @@ cases.forEach((data, index) => {
     }, page);
 
     await qa.step('Сохранить session id для проверки на уникальность', async () => {
-      // Сравнение session id разных аккаунтов возможно только после того, как отработают все
-      // тесты, поэтому здесь просто сохраняем свою запись — сверяет её after-run.ts.
-      appendSessionRecord({ case_id: caseId, login: data.login, password: data.password, sessionId });
+      // Сравнить session id разных аккаунтов можно только после того, как отработают все тесты,
+      // поэтому здесь просто сохраняем свою запись — сверяет их after-run.ts.
+      const recordId = appendSessionRecord({ case_id: caseId, login: data.login, password: data.password, sessionId });
+      // Метка связывает запись с результатом этого теста в Allure: если session id совпадёт
+      // с другим аккаунтом, after-run.ts найдёт по ней именно этот тест и пометит его упавшим.
+      await allure.label('session_record', recordId);
       await qa.attach('session-id', { login: data.login, password: data.password, sessionId });
     }, page);
 

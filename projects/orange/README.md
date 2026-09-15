@@ -9,6 +9,13 @@
 npm run orange
 ```
 
+На Windows `npm run orange` не работает — в Git Bash запускайте напрямую
+(подробности — в корневом README, раздел «Windows: установка и запуск»):
+
+```bash
+bash scripts/run-local.sh --project orange --env production --suite ui --profile smoke --data projects/orange/data/pages.csv
+```
+
 Перед запуском команда удаляет старые файлы из `artifacts`. Новый запуск создаёт:
 
 - `allure-results` — исходные Allure 2 результаты;
@@ -67,9 +74,12 @@ abc3,3456
 Дальше тест **вводит логин и пароль и нажимает Continuă**, проверяет переход на
 `my.orange.md` и появление блока профиля (без привязки к конкретному имени — оно у каждого
 логина своё), читает cookie `MyoWeb.BrowserSessionId` и сохраняет его в Allure-вложение вместе
-с логином/паролем. После того как отработают все аккаунты, отдельный шаг (`after-run.ts`)
-сверяет все session id между собой и пишет ещё один Allure-тест "Session id уникален для
-каждого логина" — passed, если дублей нет, failed с перечислением совпавших логинов, если есть.
+с логином/паролем. После того как отработают все аккаунты, `after-run.ts` сверяет session id
+между собой и добавляет в каждый тест логина шаг «Session id уникален среди всех логинов прогона».
+Упавшими помечаются **только** тесты, у которых session id совпал, — с сообщением, с каким именно
+аккаунтом («Session id совпадает с: abc1@mail.ru (строка 2)»). Остальные тесты остаются зелёными.
+В терминале Playwright такие тесты показаны как пройденные — сверка идёт уже после него,
+итоговый статус смотрите в Allure.
 
 Ещё один шаг собирает сообщения браузерной консоли за весь тест (`console-messages` во
 вложениях) — сам разбор этих сообщений и сверка с UI пока не написаны, шаг подготовлен под это.
@@ -91,7 +101,7 @@ npm run qa -- --project orange --env production --suite api-load --profile smoke
 ## Grafana
 
 ```bash
-open -a Docker
+# запустите Docker Desktop (macOS: open -a Docker)
 docker compose up -d
 npm run orange
 ```

@@ -43,8 +43,10 @@ npx playwright install chromium
 Для Allure 2 нужна Java 17+. Для нагрузочных тестов (`--suite api-load`) нужен k6
 (`brew install k6` или https://k6.io/docs/get-started/installation/).
 
-**Windows:** `npm run qa` работает как есть. Скрипты `npm run local` / `npm run orange`
-написаны на bash — для них нужен Git Bash (ставится вместе с Git for Windows).
+**Windows:** пошаговая инструкция — в корневом [README.md](../README.md), раздел «Windows: установка
+и запуск». Коротко: все команды выполняются в Git Bash, `npm run qa` работает как есть, а вместо
+`npm run local` / `npm run orange` запускается `bash scripts/run-local.sh ...` — npm на Windows
+вызывает bash из WSL, а не Git Bash.
 
 Перед первым запуском на новой машине:
 
