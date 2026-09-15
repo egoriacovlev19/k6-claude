@@ -1,0 +1,25 @@
+node_modules/
+
+# Результаты прогонов: Allure, события, metrics.prom, скриншоты и trace Playwright.
+artifacts/
+
+# Тест-данные с логинами и паролями. Сами файлы остаются на диске и тесты по ним бегают,
+# но в репозиторий не попадают — в git коммитятся только шаблоны *.example.
+projects/*/data/*.csv
+!projects/*/data/*.csv.example
+
+# Переменные окружения (адреса, инфраструктура, токены).
+.env
+.env.*
+!.env.*.example
+
+# Логи
+*.log
+npm-debug.log*
+
+# Папки Playwright по умолчанию — появляются, только если запускать его мимо core/cli.ts.
+test-results/
+playwright-report/
+
+# macOS
+.DS_Store

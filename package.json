@@ -1,0 +1,29 @@
+{
+  "name": "qa-framework",
+  "version": "0.1.0",
+  "description": "Multi-project Playwright performance framework with k6, Allure 2 and Grafana",
+  "main": "index.js",
+  "scripts": {
+    "qa": "node --import tsx core/cli.ts",
+    "clean": "node --import tsx core/clean.ts",
+    "local": "bash scripts/run-local.sh",
+    "orange": "bash scripts/run-local.sh --project orange --env production --suite ui --profile smoke --data projects/orange/data/pages.csv",
+    "stack:down": "docker compose down",
+    "check": "tsc --noEmit"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "type": "module",
+  "devDependencies": {
+    "@playwright/test": "1.63.0",
+    "@types/node": "22.20.2",
+    "allure-commandline": "2.43.0",
+    "allure-js-commons": "3.12.1",
+    "allure-playwright": "3.12.1",
+    "csv-parse": "7.0.2",
+    "tsx": "4.23.13",
+    "typescript": "7.0.2"
+  },
+  "private": true
+}

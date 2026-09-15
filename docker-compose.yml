@@ -1,0 +1,21 @@
+# Local Grafana stack. Metrics are plain Prometheus text, no database is used.
+services:
+  prometheus:
+    image: prom/prometheus:v3.7.3
+    ports: ["127.0.0.1:9090:9090"]
+    volumes:
+      - ./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+  metrics-exporter:
+    image: node:22-alpine
+    command: ['node', '/server/exporter.js']
+    volumes:
+      - ./artifacts:/artifacts:ro
+      - ./infra/prometheus/exporter.js:/server/exporter.js:ro
+    ports: ["127.0.0.1:9100:9100"]
+  grafana:
+    image: grafana/grafana:11.6.0
+    ports: ["127.0.0.1:3000:3000"]
+    depends_on: [prometheus]
+    volumes:
+      - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro
+      - ./infra/grafana/dashboards:/var/lib/grafana/dashboards:ro

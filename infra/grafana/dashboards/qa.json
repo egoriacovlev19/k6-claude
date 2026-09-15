@@ -1,0 +1,58 @@
+{
+  "uid": "qa-runs",
+  "title": "QA runs and page performance",
+  "schemaVersion": 39,
+  "version": 1,
+  "time": { "from": "now-6h", "to": "now" },
+  "templating": {
+    "list": [
+      { "name": "project", "type": "query", "datasource": { "type": "prometheus", "uid": "qa-prometheus" }, "query": "label_values(qa_event_value, project)", "includeAll": true, "multi": true, "current": { "text": "All", "value": ["$__all"] } },
+      { "name": "case", "type": "query", "datasource": { "type": "prometheus", "uid": "qa-prometheus" }, "query": "label_values(qa_event_value, case_id)", "includeAll": true, "multi": true, "current": { "text": "All", "value": ["$__all"] } }
+    ]
+  },
+  "panels": [
+    {
+      "id": 1,
+      "title": "Element loading time (ms)",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 0, "w": 24, "h": 9 },
+      "datasource": { "type": "prometheus", "uid": "qa-prometheus" },
+      "fieldConfig": { "defaults": { "unit": "ms" }, "overrides": [] },
+      "targets": [ { "refId": "A", "expr": "qa_event_value{project=~\"$project\",case_id=~\"$case\",name=~\"element.*\"}", "legendFormat": "{{case_id}} / {{name}}" } ]
+    },
+    {
+      "id": 2,
+      "title": "Page and check time (ms)",
+      "type": "timeseries",
+      "gridPos": { "x": 0, "y": 9, "w": 24, "h": 9 },
+      "datasource": { "type": "prometheus", "uid": "qa-prometheus" },
+      "fieldConfig": { "defaults": { "unit": "ms" }, "overrides": [] },
+      "targets": [ { "refId": "A", "expr": "qa_event_value{project=~\"$project\",case_id=~\"$case\",name=~\"page.*|check.*\"}", "legendFormat": "{{case_id}} / {{name}}" } ]
+    },
+    {
+      "id": 3,
+      "title": "Passed events",
+      "type": "stat",
+      "gridPos": { "x": 0, "y": 18, "w": 6, "h": 6 },
+      "datasource": { "type": "prometheus", "uid": "qa-prometheus" },
+      "fieldConfig": { "defaults": { "color": { "mode": "fixed", "fixedColor": "green" }, "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null } ] } }, "overrides": [] },
+      "targets": [ { "refId": "A", "expr": "count(qa_event_status{project=~\"$project\",case_id=~\"$case\",status=\"passed\"})", "legendFormat": "passed" } ]
+    },
+    {
+      "id": 5,
+      "title": "Failed events",
+      "type": "stat",
+      "gridPos": { "x": 6, "y": 18, "w": 6, "h": 6 },
+      "datasource": { "type": "prometheus", "uid": "qa-prometheus" },
+      "fieldConfig": { "defaults": { "thresholds": { "mode": "absolute", "steps": [ { "color": "green", "value": null }, { "color": "red", "value": 1 } ] } }, "overrides": [] },
+      "targets": [ { "refId": "A", "expr": "count(qa_event_status{project=~\"$project\",case_id=~\"$case\",status=\"failed\"}) OR on() vector(0)", "legendFormat": "failed" } ]
+    },
+    {
+      "id": 4,
+      "title": "Allure files",
+      "type": "text",
+      "gridPos": { "x": 12, "y": 18, "w": 12, "h": 6 },
+      "options": { "mode": "markdown", "content": "Allure report is generated locally in `artifacts/allure-report`.\n\nFailed steps contain the last screenshot, Playwright error, processed error and context attachment." }
+    }
+  ]
+}
