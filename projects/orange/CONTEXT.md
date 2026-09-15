@@ -32,7 +32,7 @@
   Читается через `core/data.ts` (`readCases`), путь передаётся флагом `--data`.
 - `pages/LoginPage.ts` — Page Object: локаторы элементов формы + профиля после входа
   (`profileIndicator`), методы проверки (`checkTitle`, `checkEmptyInputs`, `checkContinueButton`,
-  `checkCreateAccountButton`), действие `login()`, проверка `expectLoggedIn()` и чтение
+  `checkCreateAccountButton`), действие `login()`, проверка `expectLoggedIn(origin)` (домен берётся из адреса окружения) и чтение
   `sessionId()` из cookie.
 - `tests/ui/login-form.spec.ts` — сам тест, по одному на аккаунт, с явными шагами Allure.
 - `sessionLog.ts` — общий журнал session id за прогон (пишет каждый тест, читает `after-run.ts`).

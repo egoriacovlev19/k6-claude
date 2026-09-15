@@ -65,21 +65,23 @@ function parseCliArgs(): CliArgs {
   const { values } = parseArgs({
     options: {
       project: { type: 'string' },
-      env: { type: 'string', default: 'local' },
+      env: { type: 'string' },
       suite: { type: 'string', default: 'ui' },
-      profile: { type: 'string', default: 'smoke' },
+      profile: { type: 'string' },
       data: { type: 'string' },
     },
   });
 
   if (!values.project) throw new Error('Укажите --project <имя папки из projects/>');
+  if (!values.env) throw new Error('Укажите --env <окружение из environments в project.config.ts>');
+  if (!values.profile) throw new Error('Укажите --profile <профиль из profiles в project.config.ts>');
   if (!['ui', 'api', 'api-load'].includes(values.suite!)) throw new Error('suite must be ui, api or api-load');
 
   return {
     project: values.project,
-    env: values.env!,
+    env: values.env,
     suite: values.suite as Suite,
-    profile: values.profile!,
+    profile: values.profile,
     data: values.data,
   };
 }
@@ -210,6 +212,11 @@ function writeK6AllureResult(directory: string, project: string, baseURL: string
   runtime.writeTest(uuid);
 }
 
+/** Где лежит k6-сценарий проекта. Соглашение фреймворка: один файл load/scenario.js на проект. */
+function loadScriptPath(project: string): string {
+  return path.resolve('projects', project, 'load', 'scenario.js');
+}
+
 /**
  * Запускает нагрузочный тест k6.
  *
@@ -219,7 +226,7 @@ function writeK6AllureResult(directory: string, project: string, baseURL: string
 async function runApiLoad(args: CliArgs, baseURL: string, directory: string, env: NodeJS.ProcessEnv): Promise<number> {
   const start = Date.now();
   const summaryPath = path.join(directory, 'k6-summary.json');
-  const scriptPath = path.resolve('projects', args.project, 'load', 'scenario.js');
+  const scriptPath = loadScriptPath(args.project);
 
   // Путь к k6 можно переопределить переменной окружения, если бинарника нет в PATH.
   const exitCode = await command(process.env.K6_PERFORMANCE_K6_BINARY || 'k6', [
@@ -259,7 +266,10 @@ async function runAfterHook(args: CliArgs, env: NodeJS.ProcessEnv): Promise<numb
  */
 async function generateAllureReport(directory: string, env: NodeJS.ProcessEnv, exitCode: number): Promise<number> {
   try {
-    const reportCode = await command(path.resolve('node_modules/.bin/allure'), [
+    // Запускаем через node, а не node_modules/.bin/allure напрямую: там скрипт без расширения,
+    // и на Windows без shell он не запускается. Пакет allure-commandline сам выбирает .bat на Windows.
+    const reportCode = await command(process.execPath, [
+      path.resolve('node_modules/allure-commandline/bin/allure'),
       'generate', path.join(directory, 'allure-results'), '--clean', '-o', path.join(directory, 'allure-report'),
     ], env);
     if (reportCode) {
@@ -282,13 +292,17 @@ async function main() {
   const config = await loadProject(args.project);
   const profile = config.profiles[args.profile];
   const baseURL = config.environments[args.env];
-  if (!profile || !baseURL) throw new Error('Unknown environment or load profile');
+  if (!baseURL) {
+    throw new Error(`Нет окружения "${args.env}" в project.config.ts. Доступные: ${Object.keys(config.environments).join(', ')}`);
+  }
+  if (!profile) {
+    throw new Error(`Нет профиля "${args.profile}" в project.config.ts. Доступные: ${Object.keys(config.profiles).join(', ')}`);
+  }
 
   // Всё, что можно проверить до запуска браузеров, проверяем заранее — чтобы падать сразу
   // и с понятным сообщением, а не посреди прогона.
-  const loadScriptPath = path.resolve('projects', args.project, 'load', 'scenario.js');
-  if (args.suite === 'api-load' && !fs.existsSync(loadScriptPath)) {
-    throw new Error(`Нет файла ${loadScriptPath} — создайте k6-сценарий для этого проекта`);
+  if (args.suite === 'api-load' && !fs.existsSync(loadScriptPath(args.project))) {
+    throw new Error(`Нет файла ${loadScriptPath(args.project)} — создайте k6-сценарий для этого проекта`);
   }
   readCases(args.data, baseURL);
 

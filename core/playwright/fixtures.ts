@@ -1,6 +1,8 @@
 import { test as base, expect, type Page, type Locator, type TestInfo } from '@playwright/test';
 import * as allure from 'allure-js-commons';
+import path from 'node:path';
 import { performance } from 'node:perf_hooks';
+import { MAX_ELEMENT_WAIT_MS } from '../config';
 import { saveEvent } from '../events';
 import { errorDetails } from '../errors';
 import type { CaseData } from '../data';
@@ -34,7 +36,8 @@ export class RunContext {
     await allure.parameter('iteration', String(this.iteration));
     await allure.parameter('environment', process.env.QA_ENV!);
     await allure.parameter('run_id', process.env.QA_RUN_ID || 'local');
-    if (process.env.QA_DATA) await allure.parameter('csv_file', process.env.QA_DATA);
+    // Только имя файла: полный путь раскрыл бы в отчёте имя пользователя и структуру папок машины.
+    if (process.env.QA_DATA) await allure.parameter('csv_file', path.basename(process.env.QA_DATA));
   }
 
   /** Сохраняет одно измерение: в память теста (для вложений) и в журнал событий (для Grafana). */
@@ -125,8 +128,7 @@ export class RunContext {
     budgetMs: number,
     page?: Page,
   ) {
-    // Правило фреймворка: конкретный элемент ждём максимум 3 секунды.
-    const elementTimeout = Math.min(budgetMs, 3000);
+    const elementTimeout = Math.min(budgetMs, MAX_ELEMENT_WAIT_MS);
     const start = performance.now();
     const pendingAction = action();
 

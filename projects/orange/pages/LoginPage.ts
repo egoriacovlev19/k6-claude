@@ -76,11 +76,16 @@ export class LoginPage {
     await this.continueButton.click();
   }
 
-  /** Проверяет, что вход прошёл: сайт увёл на my.orange.md и блок профиля загрузился. */
-  async expectLoggedIn() {
+  /**
+   * Проверяет, что вход прошёл: сайт вернул на исходный домен и блок профиля загрузился.
+   *
+   * expectedOrigin — домен сайта из окружения (например, https://my.orange.md). Берём его из
+   * конфига, а не пишем здесь: так тест работает и на другом окружении без правки Page Object.
+   */
+  async expectLoggedIn(expectedOrigin: string) {
     // Точный путь после редиректа может отличаться (язык, query-параметры), поэтому ждём домен,
     // а не точное совпадение адреса — иначе тест ложно падал бы на безобидных деталях URL.
-    await this.page.waitForURL(url => url.href.startsWith('https://my.orange.md'), { timeout: 10000 });
+    await this.page.waitForURL(url => url.origin === expectedOrigin, { timeout: 10000 });
     await expect(this.profileIndicator).toBeVisible();
   }
 

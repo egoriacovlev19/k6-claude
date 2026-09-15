@@ -20,9 +20,11 @@ cases.forEach((data, index) => {
   test(`Orange: форма входа [${caseId}]`, {
     annotation: { type: 'case_id', description: caseId },
   }, async ({ page, qa }) => {
+    // QA_PROFILE всегда выставляет core/cli.ts и заранее проверяет, что такой профиль есть.
+    const profile = config.profiles[process.env.QA_PROFILE!];
+
     // Тесты стартуют параллельно, но каждая следующая строка ждёт свой интервал:
     // первая идёт сразу, вторая через lineIntervalSeconds, третья — через два интервала.
-    const profile = config.profiles[process.env.QA_PROFILE || 'smoke'];
     const interval = (profile.ui.lineIntervalSeconds || 0) * 1000;
     if (interval > 0 && index > 0) await new Promise(resolve => setTimeout(resolve, index * interval));
 
@@ -74,7 +76,7 @@ cases.forEach((data, index) => {
 
     let sessionId: string | null = null;
     await qa.step('Проверить переход на my.orange.md и загрузку профиля', async () => {
-      await qa.measure('action.loginRedirect', () => loginPage.expectLoggedIn());
+      await qa.measure('action.loginRedirect', () => loginPage.expectLoggedIn(new URL(data.url).origin));
       sessionId = await loginPage.sessionId();
       expect(sessionId, 'После входа должен установиться cookie MyoWeb.BrowserSessionId').not.toBeNull();
     }, page);
@@ -90,6 +92,7 @@ cases.forEach((data, index) => {
       // Сообщения браузерной консоли за весь тест уже собраны в consoleMessages, по порядку.
       // Дальше — разбор: найти нужное сообщение, распарсить и сверить с элементами страницы.
       await qa.attach('console-messages', consoleMessages);
+      
     }, page);
 
     await qa.step('Сохранить загрузку документа и адрес после перенаправления', async () => {

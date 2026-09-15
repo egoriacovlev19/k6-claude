@@ -31,6 +31,9 @@ export interface ProjectConfig {
   };
 }
 
+/** Правило фреймворка: отдельный элемент ждём максимум столько, каким бы ни был бюджет страницы. */
+export const MAX_ELEMENT_WAIT_MS = 3000;
+
 /** Проверяет, что число — целое и положительное (или ноль, если allowZero). */
 export function positive(value: number, name: string, allowZero = false): void {
   if (!Number.isInteger(value) || value < (allowZero ? 0 : 1)) throw new Error(`Invalid ${name}: ${value}`);
@@ -60,8 +63,9 @@ export function validate(config: ProjectConfig): ProjectConfig {
 
   for (const [name, value] of Object.entries(config.budgets)) positive(value, name);
 
-  // Правило фреймворка: отдельный элемент ждём максимум 3 секунды, каким бы ни был бюджет страницы.
-  if (config.budgets.elementReadyMs > 3000) throw new Error('elementReadyMs cannot be more than 3000 ms');
+  if (config.budgets.elementReadyMs > MAX_ELEMENT_WAIT_MS) {
+    throw new Error(`elementReadyMs cannot be more than ${MAX_ELEMENT_WAIT_MS} ms`);
+  }
 
   return config;
 }

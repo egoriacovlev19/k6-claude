@@ -10,5 +10,11 @@ export default defineConfig({
   timeout: config.timeoutMs || 30000,
   outputDir: path.join(run, `playwright-${process.env.QA_ITERATION || 0}`),
   reporter: [['list'], ['allure-playwright', { resultsDir: path.join(run, 'allure-results') }], ['./core/playwright/reporter.ts']],
-  use: { baseURL: process.env.QA_BASE_URL, headless: true, trace: 'retain-on-failure', screenshot: 'only-on-failure' },
+  use: {
+    baseURL: process.env.QA_BASE_URL,
+    // K6_PERFORMANCE_HEADED=true — открыть видимый браузер, чтобы глазами смотреть на тест при отладке.
+    headless: process.env.K6_PERFORMANCE_HEADED !== 'true',
+    trace: 'retain-on-failure',
+    screenshot: 'only-on-failure',
+  },
 });

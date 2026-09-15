@@ -36,6 +36,40 @@ npm ci
 npx playwright install chromium
 ```
 
+## Установка с нуля (Windows)
+
+```powershell
+# 1. Node.js 22+
+winget install OpenJS.NodeJS.LTS
+
+# 2. Docker Desktop — для Grafana/Prometheus (без БД); после установки запустите его
+winget install Docker.DockerDesktop
+
+# 3. Java 17+ — нужна для генерации отчёта Allure 2
+winget install EclipseAdoptium.Temurin.17.JDK
+
+# 4. Git (вместе с ним Git Bash — нужен для npm run local / npm run orange)
+winget install Git.Git
+
+# 5. k6 — только если будете гонять нагрузочные тесты (--suite api-load)
+winget install k6 --source winget
+
+# 6. Зависимости проекта и браузер для Playwright
+npm ci
+npx playwright install chromium
+```
+
+## Перед первым запуском
+
+```bash
+# Тест-данные: скопируйте шаблон и впишите реальные логины/пароли (файл не попадёт в git)
+cp projects/orange/data/pages.csv.example projects/orange/data/pages.csv
+
+# Необязательно: переменные окружения (порты, путь к k6, вход в Grafana).
+# Вместо файла их можно задать в системных переменных окружения — они в приоритете.
+cp .env.k6_performance.example .env.k6_performance
+```
+
 ## Запуск тестов
 
 Базовая команда — подходит для любого проекта из `projects/`:

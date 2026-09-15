@@ -1,20 +1,33 @@
-# Local Grafana stack. Metrics are plain Prometheus text, no database is used.
+# Локальный стек Grafana + Prometheus. Метрики — обычный текстовый файл, база данных не используется.
+#
+# Порты на хосте и логин/пароль Grafana задаются переменными K6_PERFORMANCE_* (системными или из
+# .env.k6_performance — см. .env.k6_performance.example). Если переменная не задана, берётся значение
+# после ":-". Меняется только порт на хосте: внутри Docker-сети сервисы по-прежнему ходят друг к другу
+# на стандартных портах, поэтому infra/ править не нужно.
 services:
   prometheus:
     image: prom/prometheus:v3.7.3
-    ports: ["127.0.0.1:9090:9090"]
+    ports: ["127.0.0.1:${K6_PERFORMANCE_PROMETHEUS_PORT:-9090}:9090"]
     volumes:
       - ./infra/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+
   metrics-exporter:
     image: node:22-alpine
     command: ['node', '/server/exporter.js']
     volumes:
+      # Монтируем папку artifacts целиком. Её нельзя удалять и создавать заново — только чистить
+      # содержимое, иначе контейнер потеряет её (см. docs/CONTEXT.md, инварианты).
       - ./artifacts:/artifacts:ro
       - ./infra/prometheus/exporter.js:/server/exporter.js:ro
-    ports: ["127.0.0.1:9100:9100"]
+    ports: ["127.0.0.1:${K6_PERFORMANCE_METRICS_EXPORTER_PORT:-9100}:9100"]
+
   grafana:
     image: grafana/grafana:11.6.0
-    ports: ["127.0.0.1:3000:3000"]
+    ports: ["127.0.0.1:${K6_PERFORMANCE_GRAFANA_PORT:-3000}:3000"]
+    environment:
+      # По умолчанию — стандартный вход Grafana. Порт открыт только на 127.0.0.1 (не в сеть).
+      GF_SECURITY_ADMIN_USER: ${K6_PERFORMANCE_GRAFANA_ADMIN_USER:-admin}
+      GF_SECURITY_ADMIN_PASSWORD: ${K6_PERFORMANCE_GRAFANA_ADMIN_PASSWORD:-admin}
     depends_on: [prometheus]
     volumes:
       - ./infra/grafana/provisioning:/etc/grafana/provisioning:ro

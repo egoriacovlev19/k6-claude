@@ -14,6 +14,18 @@ set -e
 # Аргументы передаются как есть в `npm run qa`, например:
 #   npm run local -- --project orange --env production --suite ui --profile smoke --data projects/orange/data/pages.csv
 
+# Подгружаем .env.k6_performance, если он есть, — чтобы docker compose и этот скрипт видели те же
+# настройки (порты, логин Grafana), что и core/cli.ts. Уже заданные системные переменные не трогаем:
+# они в приоритете. Формат файла — строки KEY=VALUE, строки с # пропускаются.
+if [ -f .env.k6_performance ]; then
+  while IFS='=' read -r key value || [ -n "$key" ]; do
+    key="${key%$'\r'}"
+    value="${value%$'\r'}"
+    case "$key" in ''|\#*) continue ;; esac
+    if [ -z "${!key+set}" ]; then export "$key=$value"; fi
+  done < .env.k6_performance
+fi
+
 echo "1/5: удаляем старые артефакты"
 npm run clean
 
@@ -30,7 +42,8 @@ set -e
 
 echo "5/5: открываем Allure 2 и Grafana"
 npx allure open artifacts/allure-report &
-echo "Grafana: http://localhost:3000 (admin/admin) -> дашборд 'QA runs and page performance'"
+echo "Grafana: http://localhost:${K6_PERFORMANCE_GRAFANA_PORT:-3000} -> дашборд 'QA runs and page performance'"
+echo "Вход в Grafana: K6_PERFORMANCE_GRAFANA_ADMIN_USER / K6_PERFORMANCE_GRAFANA_ADMIN_PASSWORD (если не заданы — стандартный вход Grafana)"
 
 # Код возврата скрипта отражает результат тестов (для CI/автоматизации),
 # но отчёты к этому моменту уже собраны и открыты.

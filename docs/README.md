@@ -22,7 +22,7 @@ projects/<name>/        — конкретный сайт или API под те
   tests/ui, tests/api   — тесты
   load/scenario.js      — k6-сценарий нагрузки (только если проекту вообще нужна нагрузка)
   after-run.ts          — необязательная проверка после всех тестов
-  data/*.csv            — тест-данные (без логинов и паролей — они в переменных окружения)
+  data/*.csv            — тест-данные, в т.ч. логины/пароли (в .gitignore; в git — *.csv.example)
 ```
 
 `core/` ничего не знает про конкретные проекты: он одинаково работает для любой папки
@@ -43,6 +43,16 @@ npx playwright install chromium
 Для Allure 2 нужна Java 17+. Для нагрузочных тестов (`--suite api-load`) нужен k6
 (`brew install k6` или https://k6.io/docs/get-started/installation/).
 
+**Windows:** `npm run qa` работает как есть. Скрипты `npm run local` / `npm run orange`
+написаны на bash — для них нужен Git Bash (ставится вместе с Git for Windows).
+
+Перед первым запуском на новой машине:
+
+```bash
+cp projects/orange/data/pages.csv.example projects/orange/data/pages.csv   # и впишите логины/пароли
+cp .env.k6_performance.example .env.k6_performance                           # необязательно
+```
+
 ## Тест-данные и переменные окружения
 
 Это разные вещи, и хранятся они по-разному:
@@ -60,9 +70,24 @@ npx playwright install chromium
 2. задайте те же переменные в системных переменных окружения — они имеют приоритет
    над файлом, поэтому на рабочей машине файл можно не держать вовсе.
 
+Все переменные необязательные: если не задана — берётся значение по умолчанию.
+
+| Переменная | Что задаёт | По умолчанию |
+|---|---|---|
+| `K6_PERFORMANCE_K6_BINARY` | путь к k6, если его нет в PATH | `k6` |
+| `K6_PERFORMANCE_HEADED` | `true` — видимый браузер для отладки | без окна |
+| `K6_PERFORMANCE_GRAFANA_ADMIN_USER` | логин администратора Grafana | стандартный вход Grafana |
+| `K6_PERFORMANCE_GRAFANA_ADMIN_PASSWORD` | пароль администратора Grafana | стандартный вход Grafana |
+| `K6_PERFORMANCE_GRAFANA_PORT` | порт Grafana на машине | `3000` |
+| `K6_PERFORMANCE_PROMETHEUS_PORT` | порт Prometheus на машине | `9090` |
+| `K6_PERFORMANCE_METRICS_EXPORTER_PORT` | порт metrics-exporter на машине | `9100` |
+
 В git не попадает ни то, ни другое — только шаблоны.
 
 ## Запуск
+
+`--project`, `--env` и `--profile` обязательны. Если значения нет в `project.config.ts`,
+команда сразу подскажет, какие есть (например: `Нет окружения "staging". Доступные: production`).
 
 Ручной запуск одного набора тестов:
 
@@ -97,12 +122,17 @@ npm run local -- --project <name> --env <env> --suite ui --profile smoke --data 
 Нужен только Docker Desktop:
 
 ```bash
-open -a Docker
+open -a Docker          # macOS; на Windows просто запустите Docker Desktop
 docker compose up -d
 npm run qa -- --project <name> --env <env> --suite ui --profile smoke
 ```
 
-Откройте http://localhost:3000, логин `admin`, пароль `admin`, затем dashboard
+Если переменные лежат в `.env.k6_performance`, а не в системе, поднимайте стек так:
+`docker compose --env-file .env.k6_performance up -d` (`npm run local` подгружает файл сам).
+
+Откройте http://localhost:3000 (порт — `K6_PERFORMANCE_GRAFANA_PORT`), войдите
+(`K6_PERFORMANCE_GRAFANA_ADMIN_USER` / `K6_PERFORMANCE_GRAFANA_ADMIN_PASSWORD`, если не заданы —
+стандартный вход Grafana), затем dashboard
 `QA runs and page performance`. Prometheus забирает `artifacts/metrics.prom` через маленький metrics-exporter.
 PostgreSQL и другие базы данных в проекте не используются: у Prometheus нет постоянного volume,
 поэтому `docker compose down` полностью сбрасывает его данные, а свежий `metrics.prom` каждый раз
