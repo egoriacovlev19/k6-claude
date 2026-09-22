@@ -1,0 +1,1388 @@
+
+
+сначала нам надо навести мышку на этот элемент
+
+вот он закрытый
+class="selector selector1"
+<div class="current-selector">060385638</div>
+
+вот открытый
+<div id="lines_list_container" class="selector selector1 active">
+                                        <div class="current-selector">060385638</div> - тут текст может быть разный 
+
+
+<div id="lines_list_container" class="selector selector1 active">
+                                        <div class="current-selector">060385638</div>
+
+                                            <div class="selector-options">
+                                                <div class="option1 strong">
+                                                    Toate numerele
+                                                </div>
+                                                        <a onclick="onSelectLineB2B(this)" data-line="{&quot;status&quot;:&quot;Activat&quot;,&quot;subscription&quot;:&quot;M2M 80&quot;}" data-line-msisdn="60385638">
+                                                            <div class="li2">
+                                                                <div>
+                                                                    <i style="font-size: 22px !important;" class="i_2 icon icon-my-account" aria-hidden="true"></i>
+                                                                </div>
+                                                                <div class="txt strong txt-l-size">
+                                                                    <span>060385638</span>
+                                                                </div>
+                                                                <div style="position: absolute; top: 28px; right: 38%; " class="txt-color-cta txt-s-size">
+                                                                    <span class="">Admin</span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                         <script type="text/javascript">
+                                                                  console.log(`Admin line - 60385638`);
+                                                      </script>
+                                                        <script type="text/javascript">
+                                                                   console.log(`Child line - 60031929`);
+                                                        </script>
+                                                        <a class="" onclick="onSelectLineB2B(this)" data-line="{&quot;status&quot;:&quot;Activat&quot;,&quot;subscription&quot;:&quot;M2M 100&quot;}" data-line-msisdn="60031929">
+                                                            <div class="li2">
+                                                                <div>
+                                                                    <i class="i_2 icon icon-unlimited-calls" aria-hidden="true"></i>
+                                                                </div>
+                                                                <div class="txt strong txt-l-size">
+                                                                    <span>060031929</span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <script type="text/javascript">
+                                                                   console.log(`Child line - 69006220`);
+                                                        </script>
+                                                        <a class="" onclick="onSelectLineB2B(this)" data-line="{&quot;status&quot;:&quot;Activat&quot;,&quot;subscription&quot;:&quot;M2M 20&quot;}" data-line-msisdn="69006220">
+                                                            <div class="li2">
+                                                                <div>
+                                                                    <i class="i_2 icon icon-unlimited-calls" aria-hidden="true"></i>
+                                                                </div>
+                                                                <div class="txt strong txt-l-size">
+                                                                    <span>069006220</span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <script type="text/javascript">
+                                                                   console.log(`Child line - 69000576`);
+                                                        </script>
+                                                        <a class="" onclick="onSelectLineB2B(this)" data-line="{&quot;status&quot;:&quot;Activat&quot;,&quot;subscription&quot;:&quot;M2M 80&quot;}" data-line-msisdn="69000576">
+                                                            <div class="li2">
+                                                                <div>
+                                                                    <i class="i_2 icon icon-unlimited-calls" aria-hidden="true"></i>
+                                                                </div>
+                                                                <div class="txt strong txt-l-size">
+                                                                    <span>069000576</span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                        <script type="text/javascript">
+                                                                   console.log(`Child line - 62182693`);
+                                                        </script>
+                                                        <a class="" onclick="onSelectLineB2B(this)" data-line="{&quot;status&quot;:&quot;Activat&quot;,&quot;subscription&quot;:&quot;Oficiu Acum 150&quot;}" data-line-msisdn="62182693">
+                                                            <div class="li2">
+                                                                <div>
+                                                                    <i class="i_2 icon icon-unlimited-calls" aria-hidden="true"></i>
+                                                                </div>
+                                                                <div class="txt strong txt-l-size">
+                                                                    <span>062182693</span>
+                                                                </div>
+                                                            </div>
+                                                        </a>
+                                                <div class="more_d strong txt-color-cta">
+                                                    <button onclick="document.location.href=&quot;/lines/lineslist&quot;" style="width: 100%;" class="s-size inverted">
+                                                        Mai mult
+                                                    </button>
+                                                </div>
+                                            </div>
+
+                                        <input type="hidden" name="selector-name" class="" id="color-hidden" value="" data-scope="selector-value">
+                                    </div>
+									
+									
+									после того как мы на него наведемся у нас будет список номеров которые у нас есть внутри этого dropdown элемента
+									
+									
+									
+									мы их собираем и сверяем
+									
+									сверху у нас parent и внутри childs
+									
+									и вот наш текст с консоли 
+									
+								Admin line - 60385638 myorangetest.orange.md:339:75
+								Child line - 60031929 
+								Child line - 69006220 
+								Child line - 69000576 
+								Child line - 62182693
+								и номеров может быть очень много 10-20 и нам надо проверить что они там есть (а если какие то отображаются в консоли но их нет на ui - то выдать это просто как алерт в тесте в атачментах - не надо руинить тест)
+								
+								
+								
+								дальше у нас такой текст
+								Abo name - M2M 80
+								
+								и такой локатор
+								
+								<div id="dashboard-widget-widget-plan" class="dash-plan-postpaid">
+                <div class="flex">
+                    <div style="padding-right:20px;">
+                        <span style="font-size: 70px;" class="icon icon-device-smart-phone" alt="Plan Image"></span>
+                    </div>
+                    <ul class="inner-contents">
+                        <li>
+                            <h3>Plan tarifar</h3>
+                        </li>
+                        <li>
+                            <script type="text/javascript">
+                                     console.log(`Abo name - M2M 80`);
+                            </script>
+                            <ul class="inv-c-tab">
+                                <li></li>
+                                <li>
+                                    <h5 class="dt">M2M 80</h5>
+                                    <h1 class="m">M2M 80</h1>
+                                </li>
+                            </ul>
+                        </li>
+                        <span class="s_20"></span>
+                        <div class="plan-btn-group">
+                        </div>
+                    </ul>
+                </div>
+                <div class="postpaid" style="padding-left:15px">
+                    <span class="s_20"></span>
+                        <button class="s-size" onclick="document.location.href=&quot;/plan/details&quot;">
+                            Detalii
+                        </button>
+                        
+
+                    <span class="m s_50"></span>
+                </div>
+            </div>
+			
+			Abo name - это наш ключ и мы должны потом абонимент юзера найти на сайте и сверть что все верно отобразилось ( В ЭТОЙ СЕССИИ)
+			
+			
+			
+			дальше вот у нас есть такой вот локатор
+			<div class="custom-dashboard flex w-100">
+        <div id="dashboard-widget-widget-plan" class="w-49">
+            <div id="dashboard-widget-widget-plan" class="dash-plan-postpaid">
+                <div class="flex">
+                    <div style="padding-right:20px;">
+                        <span style="font-size: 70px;" class="icon icon-device-smart-phone" alt="Plan Image"></span>
+                    </div>
+                    <ul class="inner-contents">
+                        <li>
+                            <h3>Plan tarifar</h3>
+                        </li>
+                        <li>
+                            <script type="text/javascript">
+                                     console.log(`Abo name - M2M 80`);
+                            </script>
+                            <ul class="inv-c-tab">
+                                <li></li>
+                                <li>
+                                    <h5 class="dt">M2M 80</h5>
+                                    <h1 class="m">M2M 80</h1>
+                                </li>
+                            </ul>
+                        </li>
+                        <span class="s_20"></span>
+                        <div class="plan-btn-group">
+                        </div>
+                    </ul>
+                </div>
+                <div class="postpaid" style="padding-left:15px">
+                    <span class="s_20"></span>
+                        <button class="s-size" onclick="document.location.href=&quot;/plan/details&quot;">
+                            Detalii
+                        </button>
+                        
+
+                    <span class="m s_50"></span>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+
+<link rel="stylesheet" type="text/css" href="/Content/assets/lib/OwlCarousel2-2.2.1/dist/assets/owl.carousel.css">
+<link rel="stylesheet" type="text/css" href="/Content/assets/lib/OwlCarousel2-2.2.1/dist/assets/owl.theme.default.css">
+<link rel="stylesheet" typeof="text/css" href="/Content/assets/css/dashboard-b2bcc-balance-slide.css" type="text/css">
+
+<div id="dashboard-widget-balance">
+    <div class="block-slider" style="">
+        <div class="owl-slider">
+            <div id="carousel-dashboard" class="owl-carousel owl-loaded owl-drag">
+                
+                <!--owl item-->
+                
+            <div class="owl-stage-outer owl-height" style="height: 203.3px;"><div class="owl-stage" style="transform: translate3d(-1415px, 0px, 0px); transition: 0.2s; width: 2831px;"><div class="owl-item cloned" style="width: 451.733px; margin-right: 20px;"><div class="item item1" style="padding-bottom: 10px;">
+                    <ul class="inner-contents">
+                        <li>
+                            <h3>
+                                <script type="text/javascript">
+                                                   console.log(`Balance - 1252`);
+                                </script>
+                                Balanţa numărului:
+                                <span class="txt-color-positive">1252.00 MDL</span>
+                            </h3>
+                            <span class="txt-color-grey">la data 22.09.2026 la 09:50</span>
+                        </li>
+                        <li>
+                            <span class="button-topp">
+                                <button class="cta s-size" onclick="window.location.href=&quot;/payment/topup&quot;">Achită online</button>
+                            </span>
+                            <span style="padding-left:5px" class="button-topp">
+                                <button class="s-size" onclick="window.location.href=&quot;/balance/consumptiondetails&quot;">Detalii cont</button>
+                            </span>
+                        
+                            <div class="s_10"></div>
+                            <div class="rt-container" style="text-align:center;">
+                                <ul class="bl-w" style="zoom:0 !important">
+                                        <span class="hidden" style="display:none">0;</span>
+                                        <li style="max-width: 100px;">
+                                            
+
+
+<script src="https://cdn-test.omd.md/myorange-assets/js/highcharts.js"></script>
+
+
+<div style="text-align:center">
+    <div class="gauge-container" data-gauge-id="gaugeId9ac9a78501fb4dc1a0f3852791285ecc" style="min-width: 120px; max-width: 130px; min-height: 120px; max-height: 150px; margin: 0px auto; overflow: hidden;" id="gaugeId9ac9a78501fb4dc1a0f3852791285ecc_1790059822851" data-highcharts-chart="0"><div id="highcharts-ogwt2o7-0" style="position: relative; overflow: hidden; width: 120px; height: 120px; text-align: left; line-height: normal; z-index: 0; left: 0.5px; top: 0px;" dir="ltr" class="highcharts-container "><svg version="1.1" class="highcharts-root" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size:12px;" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><desc>Created with Highcharts 7.0.3</desc><defs><clipPath id="highcharts-ogwt2o7-3"><rect x="0" y="0" width="100" height="95" fill="none"></rect></clipPath></defs><rect fill="#ffffff" class="highcharts-background" x="0" y="0" width="120" height="120" rx="0" ry="0"></rect><rect fill="none" class="highcharts-plot-background" x="10" y="10" width="100" height="95"></rect><rect fill="none" class="highcharts-plot-border" data-z-index="1" x="10" y="10" width="100" height="95"></rect><g class="highcharts-series-group" data-z-index="3"><g data-z-index="0.1" class="highcharts-series highcharts-series-0 highcharts-pie-series  highcharts-tracker" transform="translate(10,10) scale(1 1)"><path fill="#A885D8" d="M 49.983662824255 89.4999968225795 A 42 42 0 0 1 36.91906264147616 87.41101449252292 L 36.91906264147616 87.41101449252292 A 42 42 0 0 0 49.983662824255 89.4999968225795 Z" transform="translate(0,0)" stroke="#A885D8" stroke-width="10" stroke-linejoin="round" class="highcharts-point highcharts-color-0"></path></g><g data-z-index="0.1" class="highcharts-markers highcharts-series-0 highcharts-pie-series " transform="translate(10,10) scale(1 1)"></g></g><text x="60" text-anchor="middle" class="highcharts-subtitle" data-z-index="4" style="color:#666666;fill:#666666;" y="24"></text><g class="highcharts-legend" data-z-index="7"><rect fill="none" class="highcharts-legend-box" rx="0" ry="0" x="0" y="0" width="8" height="8" visibility="hidden"></rect><g data-z-index="1"><g></g></g></g></svg><span style="position: absolute; font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif; font-size: 18px; white-space: nowrap; margin-left: 0px; margin-top: 0px; left: 40px; top: 41px; color: rgb(51, 51, 51);" class="highcharts-title" data-z-index="4"><div style="width:40px;"><div style="text-align:center;padding-right:0px"><h6> 14 </h6><h6> GB</h6></div></div></span></div></div>
+    <script>
+        $(function () {
+
+            var container = $('[data-gauge-id="gaugeId9ac9a78501fb4dc1a0f3852791285ecc"]').not('.owl-item.cloned [data-gauge-id]');
+
+            if (container.closest('.owl-item.cloned').length > 0) {
+                return;
+            }
+
+            var uniqueId = 'gaugeId9ac9a78501fb4dc1a0f3852791285ecc' + '_' + Date.now();
+            container.attr('id', uniqueId);
+
+            var isUnlimited = false;
+            var isEmpty = false;
+            var percentageFilled = isUnlimited ? 100 : 200;
+
+            var data = [{
+                "id": "idData",
+                "name": "",
+                "data": isEmpty ?
+                    [
+                        { name: 'empty', y: 100, color: '#eeeeee' }
+                    ] :
+                    [
+                        { name: 'filled', y: 0, color: '#A885D8', zIndex: 2 },
+                        { name: 'empty', y: 100, color: '#eeeeee', zIndex: 1 }
+                    ]
+            }];
+
+            window.mychart = Highcharts.chart(uniqueId, {
+                chart: {
+                    type: 'pie',
+                    plotShadow: false,
+                    events: {
+                        load: function () {
+                            if (!isEmpty) {
+                                var chart = this;
+                                var series = chart.series[0];
+
+                                var moveColoredToTop = function () {
+                                    try {
+                                        var coloredPoint = series.points[0];
+                                        if (coloredPoint && coloredPoint.graphic && coloredPoint.graphic.element) {
+                                            var coloredPath = coloredPoint.graphic.element;
+                                            var parent = coloredPath.parentNode;
+                                            if (parent) {
+                                                parent.appendChild(coloredPath);
+                                            }
+                                        }
+                                    } catch (e) {
+                                        console.log('Error moving element:', e);
+                                    }
+                                };
+
+                                setTimeout(function () {
+
+                                    moveColoredToTop();
+
+                                    series.points[0].update({
+                                        y: percentageFilled,
+                                        color: '#A885D8',
+                                        zIndex: 2
+                                    }, false);
+
+                                    series.points[1].update({
+                                        y: (100 - percentageFilled),
+                                        color: '#eeeeee',
+                                        zIndex: 1
+                                    }, true, {
+                                        duration: 2000,
+                                        easing: 'easeOutQuart'
+                                    });
+
+                                    var intervals = [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000];
+                                    intervals.forEach(function (delay) {
+                                        setTimeout(moveColoredToTop, delay);
+                                    });
+                                }, 100);
+                            }
+                        }
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        innerSize: 110,
+                        borderWidth: 10,
+                        size: 84,
+                        borderColor: null,
+                        slicedOffset: 0,
+                        dataLabels: {
+                            enabled: false,
+                            connectorWidth: 0
+                        },
+                        startAngle: isUnlimited ? 0 : -180,
+                        endAngle: isUnlimited ? 360 : 45,
+                        center: ['50%', '50%'],
+                        animation: false,
+                        states: {
+                            hover: {
+                                enabled: true,
+                                brightness: 0.1
+                            }
+                        }
+                    }
+                },
+                credits: { enabled: false },
+                tooltip: { enabled: false },
+                title: {
+                    useHTML: true,
+                    text: '<div style="width:40px;"><div style="text-align:center;padding-right:0px"><h6> 14 </h6><h6> GB</h6></div></div>',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: 0
+                },
+                series: data,
+                exporting: { enabled: false }
+            });
+        });
+    </script>
+    <div id="gbCircleContent"></div>
+    <h6 class="" style="font-size:15px !important;">Total trafic, din care 6.25 GB în Roaming UE</h6>
+</div>
+                                        </li>
+                                        <span class="hidden" style="display:none">1;</span>
+                                        <li style="max-width: 100px;">
+                                            
+
+
+<script src="https://cdn-test.omd.md/myorange-assets/js/highcharts.js"></script>
+
+
+<div style="text-align:center">
+    <div class="gauge-container" data-gauge-id="gaugeId3b03db269f24438d8e194bf8d2161676" style="min-width: 120px; max-width: 130px; min-height: 120px; max-height: 150px; margin: 0px auto; overflow: hidden;" id="gaugeId3b03db269f24438d8e194bf8d2161676_1790059822875" data-highcharts-chart="1"><div id="highcharts-ogwt2o7-5" style="position: relative; overflow: hidden; width: 120px; height: 120px; text-align: left; line-height: normal; z-index: 0; left: 0.5px; top: 0px;" dir="ltr" class="highcharts-container "><svg version="1.1" class="highcharts-root" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size:12px;" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><desc>Created with Highcharts 7.0.3</desc><defs><clipPath id="highcharts-ogwt2o7-7"><rect x="0" y="0" width="100" height="95" fill="none"></rect></clipPath></defs><rect fill="#ffffff" class="highcharts-background" x="0" y="0" width="120" height="120" rx="0" ry="0"></rect><rect fill="none" class="highcharts-plot-background" x="10" y="10" width="100" height="95"></rect><rect fill="none" class="highcharts-plot-border" data-z-index="1" x="10" y="10" width="100" height="95"></rect><g class="highcharts-series-group" data-z-index="3"><g data-z-index="0.1" class="highcharts-series highcharts-series-0 highcharts-pie-series highcharts-tracker" transform="translate(10,10) scale(1 1)"><path fill="#eeeeee" d="M 49.983662824255 89.9999968225795 A 42 42 0 1 1 79.68060579721133 18.28364693454889 L 79.68060579721133 18.28364693454889 A 42 42 0 1 0 49.983662824255 89.9999968225795 Z" transform="translate(0,0)" stroke="#eeeeee" stroke-width="10" stroke-linejoin="round" class="highcharts-point highcharts-color-0"></path></g><g data-z-index="0.1" class="highcharts-markers highcharts-series-0 highcharts-pie-series " transform="translate(10,10) scale(1 1)"></g></g><text x="60" text-anchor="middle" class="highcharts-subtitle" data-z-index="4" style="color:#666666;fill:#666666;" y="24"></text><g class="highcharts-legend" data-z-index="7"><rect fill="none" class="highcharts-legend-box" rx="0" ry="0" x="0" y="0" width="8" height="8" visibility="hidden"></rect><g data-z-index="1"><g></g></g></g></svg><span style="position: absolute; font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif; font-size: 18px; white-space: nowrap; margin-left: 0px; margin-top: 0px; left: 40px; top: 41px; color: rgb(51, 51, 51);" class="highcharts-title" data-z-index="4"><div style="width:40px;"><div style="text-align:center;padding-right:0px"><h6> 0 </h6><h6> sec</h6></div></div></span></div></div>
+    <script>
+        $(function () {
+
+            var container = $('[data-gauge-id="gaugeId3b03db269f24438d8e194bf8d2161676"]').not('.owl-item.cloned [data-gauge-id]');
+
+            if (container.closest('.owl-item.cloned').length > 0) {
+                return;
+            }
+
+            var uniqueId = 'gaugeId3b03db269f24438d8e194bf8d2161676' + '_' + Date.now();
+            container.attr('id', uniqueId);
+
+            var isUnlimited = false;
+            var isEmpty = true;
+            var percentageFilled = isUnlimited ? 100 : 0;
+
+            var data = [{
+                "id": "idData",
+                "name": "",
+                "data": isEmpty ?
+                    [
+                        { name: 'empty', y: 100, color: '#eeeeee' }
+                    ] :
+                    [
+                        { name: 'filled', y: 0, color: '#eeeeee', zIndex: 2 },
+                        { name: 'empty', y: 100, color: '#eeeeee', zIndex: 1 }
+                    ]
+            }];
+
+            window.mychart = Highcharts.chart(uniqueId, {
+                chart: {
+                    type: 'pie',
+                    plotShadow: false,
+                    events: {
+                        load: function () {
+                            if (!isEmpty) {
+                                var chart = this;
+                                var series = chart.series[0];
+
+                                var moveColoredToTop = function () {
+                                    try {
+                                        var coloredPoint = series.points[0];
+                                        if (coloredPoint && coloredPoint.graphic && coloredPoint.graphic.element) {
+                                            var coloredPath = coloredPoint.graphic.element;
+                                            var parent = coloredPath.parentNode;
+                                            if (parent) {
+                                                parent.appendChild(coloredPath);
+                                            }
+                                        }
+                                    } catch (e) {
+                                        console.log('Error moving element:', e);
+                                    }
+                                };
+
+                                setTimeout(function () {
+
+                                    moveColoredToTop();
+
+                                    series.points[0].update({
+                                        y: percentageFilled,
+                                        color: '#eeeeee',
+                                        zIndex: 2
+                                    }, false);
+
+                                    series.points[1].update({
+                                        y: (100 - percentageFilled),
+                                        color: '#eeeeee',
+                                        zIndex: 1
+                                    }, true, {
+                                        duration: 2000,
+                                        easing: 'easeOutQuart'
+                                    });
+
+                                    var intervals = [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000];
+                                    intervals.forEach(function (delay) {
+                                        setTimeout(moveColoredToTop, delay);
+                                    });
+                                }, 100);
+                            }
+                        }
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        innerSize: 110,
+                        borderWidth: 10,
+                        size: 84,
+                        borderColor: null,
+                        slicedOffset: 0,
+                        dataLabels: {
+                            enabled: false,
+                            connectorWidth: 0
+                        },
+                        startAngle: isUnlimited ? 0 : -180,
+                        endAngle: isUnlimited ? 360 : 45,
+                        center: ['50%', '50%'],
+                        animation: false,
+                        states: {
+                            hover: {
+                                enabled: true,
+                                brightness: 0.1
+                            }
+                        }
+                    }
+                },
+                credits: { enabled: false },
+                tooltip: { enabled: false },
+                title: {
+                    useHTML: true,
+                    text: '<div style="width:40px;"><div style="text-align:center;padding-right:0px"><h6> 0 </h6><h6> sec</h6></div></div>',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: 0
+                },
+                series: data,
+                exporting: { enabled: false }
+            });
+        });
+    </script>
+    <div id="gbCircleContent"></div>
+    <h6 class="" style="font-size:15px !important;">Total minute naţionale</h6>
+</div>
+                                        </li>
+
+                                    <span class="hidden" style="display:none">2;</span>
+                                    <li class="df dtf tf" style="max-width: 91px; margin-left: 30px">
+
+                                        <a onclick="window.location.href=&quot;/balance/currentbalance&quot;">
+                                            <div class="circle"></div>
+                                            <span class="s_10"></span>
+                                            <h6>Vezi toate resursele</h6>
+                                        </a>
+
+                                    </li>
+                                    <div class="action mf">
+                                        <a onclick="window.location.href=&quot;/balance/currentbalance&quot;" class="button l-size clean">Vezi toate resursele</a>
+                                    </div>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div></div><div class="owl-item cloned" style="width: 451.733px; margin-right: 20px;"><div class="item item2">
+                    <div></div>
+                    <ul class="inner-contents">
+                        <li>
+                            <h3>
+                                <script type="text/javascript">
+                                             console.log(`Account balance - 1025.3`);
+                                </script>
+                                Balanţa contului: <span class="txt-color-positive">1025.30 MDL</span> &nbsp;
+                            </h3>
+                            <span class="txt-color-grey">la data 22.09.2026 la 09:50</span>
+                        </li>
+                        <li>
+                            <span class="button-topp">
+                                <button class="s-size" onclick="window.location.href=&quot;/payment/topup&quot;">Achită online</button>
+                            </span>
+                            <span class="s_20"></span>
+                            <div class="Message Message--orange">
+                                <div class="Message-icon">
+                                    <i class="icon icon-Warning-important"></i>
+                                </div>
+                                <div class="Message-body">
+                                    <p>La reîncărcarea contului online, prin My Orange, banii vor ajunge pe contul numărului. La reîncărcarea contului prin intermediul Magazinelor directe sau a Transferului bancar, banii vor ajunge în Balanţa contului companiei.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="m s_20"></span>
+                        </li>
+                    </ul>
+                </div></div><div class="owl-item" style="width: 451.733px; margin-right: 20px;"><div class="item item1" style="padding-bottom: 10px;">
+                    <ul class="inner-contents">
+                        <li>
+                            <h3>
+                                <script type="text/javascript">
+                                                   console.log(`Balance - 1252`);
+                                </script>
+                                Balanţa numărului:
+                                <span class="txt-color-positive">1252.00 MDL</span>
+                            </h3>
+                            <span class="txt-color-grey">la data 22.09.2026 la 09:50</span>
+                        </li>
+                        <li>
+                            <span class="button-topp">
+                                <button class="cta s-size" onclick="window.location.href=&quot;/payment/topup&quot;">Achită online</button>
+                            </span>
+                            <span style="padding-left:5px" class="button-topp">
+                                <button class="s-size" onclick="window.location.href=&quot;/balance/consumptiondetails&quot;">Detalii cont</button>
+                            </span>
+                        
+                            <div class="s_10"></div>
+                            <div class="rt-container" style="text-align:center;">
+                                <ul class="bl-w" style="zoom:0 !important">
+                                        <span class="hidden" style="display:none">0;</span>
+                                        <li style="max-width: 100px;">
+                                            
+
+
+<script src="https://cdn-test.omd.md/myorange-assets/js/highcharts.js"></script>
+
+
+<div style="text-align:center">
+    <div class="gauge-container" data-gauge-id="gaugeId9ac9a78501fb4dc1a0f3852791285ecc" style="min-width: 120px; max-width: 130px; min-height: 120px; max-height: 150px; margin: 0px auto; overflow: hidden;" id="gaugeId9ac9a78501fb4dc1a0f3852791285ecc_1790059823606" data-highcharts-chart="4"><div id="highcharts-ogwt2o7-18" style="position: relative; overflow: hidden; width: 120px; height: 120px; text-align: left; line-height: normal; z-index: 0; left: 0.0333252px; top: 0.200012px;" dir="ltr" class="highcharts-container "><svg version="1.1" class="highcharts-root" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size:12px;" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><desc>Created with Highcharts 7.0.3</desc><defs><clipPath id="highcharts-ogwt2o7-21"><rect x="0" y="0" width="100" height="95" fill="none"></rect></clipPath></defs><rect fill="#ffffff" class="highcharts-background" x="0" y="0" width="120" height="120" rx="0" ry="0"></rect><rect fill="none" class="highcharts-plot-background" x="10" y="10" width="100" height="95"></rect><rect fill="none" class="highcharts-plot-border" data-z-index="1" x="10" y="10" width="100" height="95"></rect><g class="highcharts-series-group" data-z-index="3"><g data-z-index="0.1" class="highcharts-series highcharts-series-0 highcharts-pie-series  highcharts-tracker" transform="translate(10,10) scale(1 1)"><path fill="#A885D8" d="M 49.983662824255 89.4999968225795 A 42 42 0 1 1 79.68060579721133 17.78364693454889 L 79.68060579721133 17.78364693454889 A 42 42 0 1 0 49.983662824255 89.4999968225795 Z" transform="translate(0,0)" stroke="#A885D8" stroke-width="10" stroke-linejoin="round" class="highcharts-point highcharts-color-0"></path></g><g data-z-index="0.1" class="highcharts-markers highcharts-series-0 highcharts-pie-series " transform="translate(10,10) scale(1 1)"></g></g><text x="60" text-anchor="middle" class="highcharts-subtitle" data-z-index="4" style="color:#666666;fill:#666666;" y="24"></text><g class="highcharts-legend" data-z-index="7"><rect fill="none" class="highcharts-legend-box" rx="0" ry="0" x="0" y="0" width="8" height="8" visibility="hidden"></rect><g data-z-index="1"><g></g></g></g></svg><span style="position: absolute; font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif; font-size: 18px; white-space: nowrap; margin-left: 0px; margin-top: 0px; left: 40px; top: 41px; color: rgb(51, 51, 51);" class="highcharts-title" data-z-index="4"><div style="width:40px;"><div style="text-align:center;padding-right:0px"><h6> 14 </h6><h6> GB</h6></div></div></span></div></div>
+    <script>
+        $(function () {
+
+            var container = $('[data-gauge-id="gaugeId9ac9a78501fb4dc1a0f3852791285ecc"]').not('.owl-item.cloned [data-gauge-id]');
+
+            if (container.closest('.owl-item.cloned').length > 0) {
+                return;
+            }
+
+            var uniqueId = 'gaugeId9ac9a78501fb4dc1a0f3852791285ecc' + '_' + Date.now();
+            container.attr('id', uniqueId);
+
+            var isUnlimited = false;
+            var isEmpty = false;
+            var percentageFilled = isUnlimited ? 100 : 200;
+
+            var data = [{
+                "id": "idData",
+                "name": "",
+                "data": isEmpty ?
+                    [
+                        { name: 'empty', y: 100, color: '#eeeeee' }
+                    ] :
+                    [
+                        { name: 'filled', y: 0, color: '#A885D8', zIndex: 2 },
+                        { name: 'empty', y: 100, color: '#eeeeee', zIndex: 1 }
+                    ]
+            }];
+
+            window.mychart = Highcharts.chart(uniqueId, {
+                chart: {
+                    type: 'pie',
+                    plotShadow: false,
+                    events: {
+                        load: function () {
+                            if (!isEmpty) {
+                                var chart = this;
+                                var series = chart.series[0];
+
+                                var moveColoredToTop = function () {
+                                    try {
+                                        var coloredPoint = series.points[0];
+                                        if (coloredPoint && coloredPoint.graphic && coloredPoint.graphic.element) {
+                                            var coloredPath = coloredPoint.graphic.element;
+                                            var parent = coloredPath.parentNode;
+                                            if (parent) {
+                                                parent.appendChild(coloredPath);
+                                            }
+                                        }
+                                    } catch (e) {
+                                        console.log('Error moving element:', e);
+                                    }
+                                };
+
+                                setTimeout(function () {
+
+                                    moveColoredToTop();
+
+                                    series.points[0].update({
+                                        y: percentageFilled,
+                                        color: '#A885D8',
+                                        zIndex: 2
+                                    }, false);
+
+                                    series.points[1].update({
+                                        y: (100 - percentageFilled),
+                                        color: '#eeeeee',
+                                        zIndex: 1
+                                    }, true, {
+                                        duration: 2000,
+                                        easing: 'easeOutQuart'
+                                    });
+
+                                    var intervals = [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000];
+                                    intervals.forEach(function (delay) {
+                                        setTimeout(moveColoredToTop, delay);
+                                    });
+                                }, 100);
+                            }
+                        }
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        innerSize: 110,
+                        borderWidth: 10,
+                        size: 84,
+                        borderColor: null,
+                        slicedOffset: 0,
+                        dataLabels: {
+                            enabled: false,
+                            connectorWidth: 0
+                        },
+                        startAngle: isUnlimited ? 0 : -180,
+                        endAngle: isUnlimited ? 360 : 45,
+                        center: ['50%', '50%'],
+                        animation: false,
+                        states: {
+                            hover: {
+                                enabled: true,
+                                brightness: 0.1
+                            }
+                        }
+                    }
+                },
+                credits: { enabled: false },
+                tooltip: { enabled: false },
+                title: {
+                    useHTML: true,
+                    text: '<div style="width:40px;"><div style="text-align:center;padding-right:0px"><h6> 14 </h6><h6> GB</h6></div></div>',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: 0
+                },
+                series: data,
+                exporting: { enabled: false }
+            });
+        });
+    </script>
+    <div id="gbCircleContent"></div>
+    <h6 class="" style="font-size:15px !important;">Total trafic, din care 6.25 GB în Roaming UE</h6>
+</div>
+                                        </li>
+                                        <span class="hidden" style="display:none">1;</span>
+                                        <li style="max-width: 100px;">
+                                            
+
+
+<script src="https://cdn-test.omd.md/myorange-assets/js/highcharts.js"></script>
+
+
+<div style="text-align:center">
+    <div class="gauge-container" data-gauge-id="gaugeId3b03db269f24438d8e194bf8d2161676" style="min-width: 120px; max-width: 130px; min-height: 120px; max-height: 150px; margin: 0px auto; overflow: hidden;" id="gaugeId3b03db269f24438d8e194bf8d2161676_1790059823666" data-highcharts-chart="5"><div id="highcharts-ogwt2o7-23" style="position: relative; overflow: hidden; width: 120px; height: 120px; text-align: left; line-height: normal; z-index: 0; left: 0.0333252px; top: 0.200012px;" dir="ltr" class="highcharts-container "><svg version="1.1" class="highcharts-root" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size:12px;" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><desc>Created with Highcharts 7.0.3</desc><defs><clipPath id="highcharts-ogwt2o7-25"><rect x="0" y="0" width="100" height="95" fill="none"></rect></clipPath></defs><rect fill="#ffffff" class="highcharts-background" x="0" y="0" width="120" height="120" rx="0" ry="0"></rect><rect fill="none" class="highcharts-plot-background" x="10" y="10" width="100" height="95"></rect><rect fill="none" class="highcharts-plot-border" data-z-index="1" x="10" y="10" width="100" height="95"></rect><g class="highcharts-series-group" data-z-index="3"><g data-z-index="0.1" class="highcharts-series highcharts-series-0 highcharts-pie-series highcharts-tracker" transform="translate(10,10) scale(1 1)"><path fill="#eeeeee" d="M 49.983662824255 89.9999968225795 A 42 42 0 1 1 79.68060579721133 18.28364693454889 L 79.68060579721133 18.28364693454889 A 42 42 0 1 0 49.983662824255 89.9999968225795 Z" transform="translate(0,0)" stroke="#eeeeee" stroke-width="10" stroke-linejoin="round" class="highcharts-point highcharts-color-0"></path></g><g data-z-index="0.1" class="highcharts-markers highcharts-series-0 highcharts-pie-series " transform="translate(10,10) scale(1 1)"></g></g><text x="60" text-anchor="middle" class="highcharts-subtitle" data-z-index="4" style="color:#666666;fill:#666666;" y="24"></text><g class="highcharts-legend" data-z-index="7"><rect fill="none" class="highcharts-legend-box" rx="0" ry="0" x="0" y="0" width="8" height="8" visibility="hidden"></rect><g data-z-index="1"><g></g></g></g></svg><span style="position: absolute; font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif; font-size: 18px; white-space: nowrap; margin-left: 0px; margin-top: 0px; left: 40px; top: 41px; color: rgb(51, 51, 51);" class="highcharts-title" data-z-index="4"><div style="width:40px;"><div style="text-align:center;padding-right:0px"><h6> 0 </h6><h6> sec</h6></div></div></span></div></div>
+    <script>
+        $(function () {
+
+            var container = $('[data-gauge-id="gaugeId3b03db269f24438d8e194bf8d2161676"]').not('.owl-item.cloned [data-gauge-id]');
+
+            if (container.closest('.owl-item.cloned').length > 0) {
+                return;
+            }
+
+            var uniqueId = 'gaugeId3b03db269f24438d8e194bf8d2161676' + '_' + Date.now();
+            container.attr('id', uniqueId);
+
+            var isUnlimited = false;
+            var isEmpty = true;
+            var percentageFilled = isUnlimited ? 100 : 0;
+
+            var data = [{
+                "id": "idData",
+                "name": "",
+                "data": isEmpty ?
+                    [
+                        { name: 'empty', y: 100, color: '#eeeeee' }
+                    ] :
+                    [
+                        { name: 'filled', y: 0, color: '#eeeeee', zIndex: 2 },
+                        { name: 'empty', y: 100, color: '#eeeeee', zIndex: 1 }
+                    ]
+            }];
+
+            window.mychart = Highcharts.chart(uniqueId, {
+                chart: {
+                    type: 'pie',
+                    plotShadow: false,
+                    events: {
+                        load: function () {
+                            if (!isEmpty) {
+                                var chart = this;
+                                var series = chart.series[0];
+
+                                var moveColoredToTop = function () {
+                                    try {
+                                        var coloredPoint = series.points[0];
+                                        if (coloredPoint && coloredPoint.graphic && coloredPoint.graphic.element) {
+                                            var coloredPath = coloredPoint.graphic.element;
+                                            var parent = coloredPath.parentNode;
+                                            if (parent) {
+                                                parent.appendChild(coloredPath);
+                                            }
+                                        }
+                                    } catch (e) {
+                                        console.log('Error moving element:', e);
+                                    }
+                                };
+
+                                setTimeout(function () {
+
+                                    moveColoredToTop();
+
+                                    series.points[0].update({
+                                        y: percentageFilled,
+                                        color: '#eeeeee',
+                                        zIndex: 2
+                                    }, false);
+
+                                    series.points[1].update({
+                                        y: (100 - percentageFilled),
+                                        color: '#eeeeee',
+                                        zIndex: 1
+                                    }, true, {
+                                        duration: 2000,
+                                        easing: 'easeOutQuart'
+                                    });
+
+                                    var intervals = [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000];
+                                    intervals.forEach(function (delay) {
+                                        setTimeout(moveColoredToTop, delay);
+                                    });
+                                }, 100);
+                            }
+                        }
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        innerSize: 110,
+                        borderWidth: 10,
+                        size: 84,
+                        borderColor: null,
+                        slicedOffset: 0,
+                        dataLabels: {
+                            enabled: false,
+                            connectorWidth: 0
+                        },
+                        startAngle: isUnlimited ? 0 : -180,
+                        endAngle: isUnlimited ? 360 : 45,
+                        center: ['50%', '50%'],
+                        animation: false,
+                        states: {
+                            hover: {
+                                enabled: true,
+                                brightness: 0.1
+                            }
+                        }
+                    }
+                },
+                credits: { enabled: false },
+                tooltip: { enabled: false },
+                title: {
+                    useHTML: true,
+                    text: '<div style="width:40px;"><div style="text-align:center;padding-right:0px"><h6> 0 </h6><h6> sec</h6></div></div>',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: 0
+                },
+                series: data,
+                exporting: { enabled: false }
+            });
+        });
+    </script>
+    <div id="gbCircleContent"></div>
+    <h6 class="" style="font-size:15px !important;">Total minute naţionale</h6>
+</div>
+                                        </li>
+
+                                    <span class="hidden" style="display:none">2;</span>
+                                    <li class="df dtf tf" style="max-width: 91px; margin-left: 30px">
+
+                                        <a onclick="window.location.href=&quot;/balance/currentbalance&quot;">
+                                            <div class="circle"></div>
+                                            <span class="s_10"></span>
+                                            <h6>Vezi toate resursele</h6>
+                                        </a>
+
+                                    </li>
+                                    <div class="action mf">
+                                        <a onclick="window.location.href=&quot;/balance/currentbalance&quot;" class="button l-size clean">Vezi toate resursele</a>
+                                    </div>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div></div><div class="owl-item active" style="width: 451.733px; margin-right: 20px;"><div class="item item2">
+                    <div></div>
+                    <ul class="inner-contents">
+                        <li>
+                            <h3>
+                                <script type="text/javascript">
+                                             console.log(`Account balance - 1025.3`);
+                                </script>
+                                Balanţa contului: <span class="txt-color-positive">1025.30 MDL</span> &nbsp;
+                            </h3>
+                            <span class="txt-color-grey">la data 22.09.2026 la 09:50</span>
+                        </li>
+                        <li>
+                            <span class="button-topp">
+                                <button class="s-size" onclick="window.location.href=&quot;/payment/topup&quot;">Achită online</button>
+                            </span>
+                            <span class="s_20"></span>
+                            <div class="Message Message--orange">
+                                <div class="Message-icon">
+                                    <i class="icon icon-Warning-important"></i>
+                                </div>
+                                <div class="Message-body">
+                                    <p>La reîncărcarea contului online, prin My Orange, banii vor ajunge pe contul numărului. La reîncărcarea contului prin intermediul Magazinelor directe sau a Transferului bancar, banii vor ajunge în Balanţa contului companiei.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="m s_20"></span>
+                        </li>
+                    </ul>
+                </div></div><div class="owl-item cloned" style="width: 451.733px; margin-right: 20px;"><div class="item item1" style="padding-bottom: 10px;">
+                    <ul class="inner-contents">
+                        <li>
+                            <h3>
+                                <script type="text/javascript">
+                                                   console.log(`Balance - 1252`);
+                                </script>
+                                Balanţa numărului:
+                                <span class="txt-color-positive">1252.00 MDL</span>
+                            </h3>
+                            <span class="txt-color-grey">la data 22.09.2026 la 09:50</span>
+                        </li>
+                        <li>
+                            <span class="button-topp">
+                                <button class="cta s-size" onclick="window.location.href=&quot;/payment/topup&quot;">Achită online</button>
+                            </span>
+                            <span style="padding-left:5px" class="button-topp">
+                                <button class="s-size" onclick="window.location.href=&quot;/balance/consumptiondetails&quot;">Detalii cont</button>
+                            </span>
+                        
+                            <div class="s_10"></div>
+                            <div class="rt-container" style="text-align:center;">
+                                <ul class="bl-w" style="zoom:0 !important">
+                                        <span class="hidden" style="display:none">0;</span>
+                                        <li style="max-width: 100px;">
+                                            
+
+
+<script src="https://cdn-test.omd.md/myorange-assets/js/highcharts.js"></script>
+
+
+<div style="text-align:center">
+    <div class="gauge-container" data-gauge-id="gaugeId9ac9a78501fb4dc1a0f3852791285ecc" style="min-width: 120px; max-width: 130px; min-height: 120px; max-height: 150px; margin: 0px auto; overflow: hidden;" id="gaugeId9ac9a78501fb4dc1a0f3852791285ecc_1790059822851" data-highcharts-chart="0"><div id="highcharts-ogwt2o7-0" style="position: relative; overflow: hidden; width: 120px; height: 120px; text-align: left; line-height: normal; z-index: 0; left: 0.5px; top: 0px;" dir="ltr" class="highcharts-container "><svg version="1.1" class="highcharts-root" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size:12px;" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><desc>Created with Highcharts 7.0.3</desc><defs><clipPath id="highcharts-ogwt2o7-3"><rect x="0" y="0" width="100" height="95" fill="none"></rect></clipPath></defs><rect fill="#ffffff" class="highcharts-background" x="0" y="0" width="120" height="120" rx="0" ry="0"></rect><rect fill="none" class="highcharts-plot-background" x="10" y="10" width="100" height="95"></rect><rect fill="none" class="highcharts-plot-border" data-z-index="1" x="10" y="10" width="100" height="95"></rect><g class="highcharts-series-group" data-z-index="3"><g data-z-index="0.1" class="highcharts-series highcharts-series-0 highcharts-pie-series  highcharts-tracker" transform="translate(10,10) scale(1 1)"><path fill="#A885D8" d="M 49.983662824255 89.4999968225795 A 42 42 0 0 1 36.91906264147616 87.41101449252292 L 36.91906264147616 87.41101449252292 A 42 42 0 0 0 49.983662824255 89.4999968225795 Z" transform="translate(0,0)" stroke="#A885D8" stroke-width="10" stroke-linejoin="round" class="highcharts-point highcharts-color-0"></path></g><g data-z-index="0.1" class="highcharts-markers highcharts-series-0 highcharts-pie-series " transform="translate(10,10) scale(1 1)"></g></g><text x="60" text-anchor="middle" class="highcharts-subtitle" data-z-index="4" style="color:#666666;fill:#666666;" y="24"></text><g class="highcharts-legend" data-z-index="7"><rect fill="none" class="highcharts-legend-box" rx="0" ry="0" x="0" y="0" width="8" height="8" visibility="hidden"></rect><g data-z-index="1"><g></g></g></g></svg><span style="position: absolute; font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif; font-size: 18px; white-space: nowrap; margin-left: 0px; margin-top: 0px; left: 40px; top: 41px; color: rgb(51, 51, 51);" class="highcharts-title" data-z-index="4"><div style="width:40px;"><div style="text-align:center;padding-right:0px"><h6> 14 </h6><h6> GB</h6></div></div></span></div></div>
+    <script>
+        $(function () {
+
+            var container = $('[data-gauge-id="gaugeId9ac9a78501fb4dc1a0f3852791285ecc"]').not('.owl-item.cloned [data-gauge-id]');
+
+            if (container.closest('.owl-item.cloned').length > 0) {
+                return;
+            }
+
+            var uniqueId = 'gaugeId9ac9a78501fb4dc1a0f3852791285ecc' + '_' + Date.now();
+            container.attr('id', uniqueId);
+
+            var isUnlimited = false;
+            var isEmpty = false;
+            var percentageFilled = isUnlimited ? 100 : 200;
+
+            var data = [{
+                "id": "idData",
+                "name": "",
+                "data": isEmpty ?
+                    [
+                        { name: 'empty', y: 100, color: '#eeeeee' }
+                    ] :
+                    [
+                        { name: 'filled', y: 0, color: '#A885D8', zIndex: 2 },
+                        { name: 'empty', y: 100, color: '#eeeeee', zIndex: 1 }
+                    ]
+            }];
+
+            window.mychart = Highcharts.chart(uniqueId, {
+                chart: {
+                    type: 'pie',
+                    plotShadow: false,
+                    events: {
+                        load: function () {
+                            if (!isEmpty) {
+                                var chart = this;
+                                var series = chart.series[0];
+
+                                var moveColoredToTop = function () {
+                                    try {
+                                        var coloredPoint = series.points[0];
+                                        if (coloredPoint && coloredPoint.graphic && coloredPoint.graphic.element) {
+                                            var coloredPath = coloredPoint.graphic.element;
+                                            var parent = coloredPath.parentNode;
+                                            if (parent) {
+                                                parent.appendChild(coloredPath);
+                                            }
+                                        }
+                                    } catch (e) {
+                                        console.log('Error moving element:', e);
+                                    }
+                                };
+
+                                setTimeout(function () {
+
+                                    moveColoredToTop();
+
+                                    series.points[0].update({
+                                        y: percentageFilled,
+                                        color: '#A885D8',
+                                        zIndex: 2
+                                    }, false);
+
+                                    series.points[1].update({
+                                        y: (100 - percentageFilled),
+                                        color: '#eeeeee',
+                                        zIndex: 1
+                                    }, true, {
+                                        duration: 2000,
+                                        easing: 'easeOutQuart'
+                                    });
+
+                                    var intervals = [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000];
+                                    intervals.forEach(function (delay) {
+                                        setTimeout(moveColoredToTop, delay);
+                                    });
+                                }, 100);
+                            }
+                        }
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        innerSize: 110,
+                        borderWidth: 10,
+                        size: 84,
+                        borderColor: null,
+                        slicedOffset: 0,
+                        dataLabels: {
+                            enabled: false,
+                            connectorWidth: 0
+                        },
+                        startAngle: isUnlimited ? 0 : -180,
+                        endAngle: isUnlimited ? 360 : 45,
+                        center: ['50%', '50%'],
+                        animation: false,
+                        states: {
+                            hover: {
+                                enabled: true,
+                                brightness: 0.1
+                            }
+                        }
+                    }
+                },
+                credits: { enabled: false },
+                tooltip: { enabled: false },
+                title: {
+                    useHTML: true,
+                    text: '<div style="width:40px;"><div style="text-align:center;padding-right:0px"><h6> 14 </h6><h6> GB</h6></div></div>',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: 0
+                },
+                series: data,
+                exporting: { enabled: false }
+            });
+        });
+    </script>
+    <div id="gbCircleContent"></div>
+    <h6 class="" style="font-size:15px !important;">Total trafic, din care 6.25 GB în Roaming UE</h6>
+</div>
+                                        </li>
+                                        <span class="hidden" style="display:none">1;</span>
+                                        <li style="max-width: 100px;">
+                                            
+
+
+<script src="https://cdn-test.omd.md/myorange-assets/js/highcharts.js"></script>
+
+
+<div style="text-align:center">
+    <div class="gauge-container" data-gauge-id="gaugeId3b03db269f24438d8e194bf8d2161676" style="min-width: 120px; max-width: 130px; min-height: 120px; max-height: 150px; margin: 0px auto; overflow: hidden;" id="gaugeId3b03db269f24438d8e194bf8d2161676_1790059822875" data-highcharts-chart="1"><div id="highcharts-ogwt2o7-5" style="position: relative; overflow: hidden; width: 120px; height: 120px; text-align: left; line-height: normal; z-index: 0; left: 0.5px; top: 0px;" dir="ltr" class="highcharts-container "><svg version="1.1" class="highcharts-root" style="font-family:&quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif;font-size:12px;" xmlns="http://www.w3.org/2000/svg" width="120" height="120" viewBox="0 0 120 120"><desc>Created with Highcharts 7.0.3</desc><defs><clipPath id="highcharts-ogwt2o7-7"><rect x="0" y="0" width="100" height="95" fill="none"></rect></clipPath></defs><rect fill="#ffffff" class="highcharts-background" x="0" y="0" width="120" height="120" rx="0" ry="0"></rect><rect fill="none" class="highcharts-plot-background" x="10" y="10" width="100" height="95"></rect><rect fill="none" class="highcharts-plot-border" data-z-index="1" x="10" y="10" width="100" height="95"></rect><g class="highcharts-series-group" data-z-index="3"><g data-z-index="0.1" class="highcharts-series highcharts-series-0 highcharts-pie-series highcharts-tracker" transform="translate(10,10) scale(1 1)"><path fill="#eeeeee" d="M 49.983662824255 89.9999968225795 A 42 42 0 1 1 79.68060579721133 18.28364693454889 L 79.68060579721133 18.28364693454889 A 42 42 0 1 0 49.983662824255 89.9999968225795 Z" transform="translate(0,0)" stroke="#eeeeee" stroke-width="10" stroke-linejoin="round" class="highcharts-point highcharts-color-0"></path></g><g data-z-index="0.1" class="highcharts-markers highcharts-series-0 highcharts-pie-series " transform="translate(10,10) scale(1 1)"></g></g><text x="60" text-anchor="middle" class="highcharts-subtitle" data-z-index="4" style="color:#666666;fill:#666666;" y="24"></text><g class="highcharts-legend" data-z-index="7"><rect fill="none" class="highcharts-legend-box" rx="0" ry="0" x="0" y="0" width="8" height="8" visibility="hidden"></rect><g data-z-index="1"><g></g></g></g></svg><span style="position: absolute; font-family: &quot;Lucida Grande&quot;, &quot;Lucida Sans Unicode&quot;, Arial, Helvetica, sans-serif; font-size: 18px; white-space: nowrap; margin-left: 0px; margin-top: 0px; left: 40px; top: 41px; color: rgb(51, 51, 51);" class="highcharts-title" data-z-index="4"><div style="width:40px;"><div style="text-align:center;padding-right:0px"><h6> 0 </h6><h6> sec</h6></div></div></span></div></div>
+    <script>
+        $(function () {
+
+            var container = $('[data-gauge-id="gaugeId3b03db269f24438d8e194bf8d2161676"]').not('.owl-item.cloned [data-gauge-id]');
+
+            if (container.closest('.owl-item.cloned').length > 0) {
+                return;
+            }
+
+            var uniqueId = 'gaugeId3b03db269f24438d8e194bf8d2161676' + '_' + Date.now();
+            container.attr('id', uniqueId);
+
+            var isUnlimited = false;
+            var isEmpty = true;
+            var percentageFilled = isUnlimited ? 100 : 0;
+
+            var data = [{
+                "id": "idData",
+                "name": "",
+                "data": isEmpty ?
+                    [
+                        { name: 'empty', y: 100, color: '#eeeeee' }
+                    ] :
+                    [
+                        { name: 'filled', y: 0, color: '#eeeeee', zIndex: 2 },
+                        { name: 'empty', y: 100, color: '#eeeeee', zIndex: 1 }
+                    ]
+            }];
+
+            window.mychart = Highcharts.chart(uniqueId, {
+                chart: {
+                    type: 'pie',
+                    plotShadow: false,
+                    events: {
+                        load: function () {
+                            if (!isEmpty) {
+                                var chart = this;
+                                var series = chart.series[0];
+
+                                var moveColoredToTop = function () {
+                                    try {
+                                        var coloredPoint = series.points[0];
+                                        if (coloredPoint && coloredPoint.graphic && coloredPoint.graphic.element) {
+                                            var coloredPath = coloredPoint.graphic.element;
+                                            var parent = coloredPath.parentNode;
+                                            if (parent) {
+                                                parent.appendChild(coloredPath);
+                                            }
+                                        }
+                                    } catch (e) {
+                                        console.log('Error moving element:', e);
+                                    }
+                                };
+
+                                setTimeout(function () {
+
+                                    moveColoredToTop();
+
+                                    series.points[0].update({
+                                        y: percentageFilled,
+                                        color: '#eeeeee',
+                                        zIndex: 2
+                                    }, false);
+
+                                    series.points[1].update({
+                                        y: (100 - percentageFilled),
+                                        color: '#eeeeee',
+                                        zIndex: 1
+                                    }, true, {
+                                        duration: 2000,
+                                        easing: 'easeOutQuart'
+                                    });
+
+                                    var intervals = [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000];
+                                    intervals.forEach(function (delay) {
+                                        setTimeout(moveColoredToTop, delay);
+                                    });
+                                }, 100);
+                            }
+                        }
+                    }
+                },
+                plotOptions: {
+                    pie: {
+                        innerSize: 110,
+                        borderWidth: 10,
+                        size: 84,
+                        borderColor: null,
+                        slicedOffset: 0,
+                        dataLabels: {
+                            enabled: false,
+                            connectorWidth: 0
+                        },
+                        startAngle: isUnlimited ? 0 : -180,
+                        endAngle: isUnlimited ? 360 : 45,
+                        center: ['50%', '50%'],
+                        animation: false,
+                        states: {
+                            hover: {
+                                enabled: true,
+                                brightness: 0.1
+                            }
+                        }
+                    }
+                },
+                credits: { enabled: false },
+                tooltip: { enabled: false },
+                title: {
+                    useHTML: true,
+                    text: '<div style="width:40px;"><div style="text-align:center;padding-right:0px"><h6> 0 </h6><h6> sec</h6></div></div>',
+                    align: 'center',
+                    verticalAlign: 'middle',
+                    y: 0
+                },
+                series: data,
+                exporting: { enabled: false }
+            });
+        });
+    </script>
+    <div id="gbCircleContent"></div>
+    <h6 class="" style="font-size:15px !important;">Total minute naţionale</h6>
+</div>
+                                        </li>
+
+                                    <span class="hidden" style="display:none">2;</span>
+                                    <li class="df dtf tf" style="max-width: 91px; margin-left: 30px">
+
+                                        <a onclick="window.location.href=&quot;/balance/currentbalance&quot;">
+                                            <div class="circle"></div>
+                                            <span class="s_10"></span>
+                                            <h6>Vezi toate resursele</h6>
+                                        </a>
+
+                                    </li>
+                                    <div class="action mf">
+                                        <a onclick="window.location.href=&quot;/balance/currentbalance&quot;" class="button l-size clean">Vezi toate resursele</a>
+                                    </div>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </div></div><div class="owl-item cloned" style="width: 451.733px; margin-right: 20px;"><div class="item item2">
+                    <div></div>
+                    <ul class="inner-contents">
+                        <li>
+                            <h3>
+                                <script type="text/javascript">
+                                             console.log(`Account balance - 1025.3`);
+                                </script>
+                                Balanţa contului: <span class="txt-color-positive">1025.30 MDL</span> &nbsp;
+                            </h3>
+                            <span class="txt-color-grey">la data 22.09.2026 la 09:50</span>
+                        </li>
+                        <li>
+                            <span class="button-topp">
+                                <button class="s-size" onclick="window.location.href=&quot;/payment/topup&quot;">Achită online</button>
+                            </span>
+                            <span class="s_20"></span>
+                            <div class="Message Message--orange">
+                                <div class="Message-icon">
+                                    <i class="icon icon-Warning-important"></i>
+                                </div>
+                                <div class="Message-body">
+                                    <p>La reîncărcarea contului online, prin My Orange, banii vor ajunge pe contul numărului. La reîncărcarea contului prin intermediul Magazinelor directe sau a Transferului bancar, banii vor ajunge în Balanţa contului companiei.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="m s_20"></span>
+                        </li>
+                    </ul>
+                </div></div></div></div><div class="owl-nav disabled"><div class="owl-prev"><i class="fa fa-chevron-left" aria-hidden="true"></i></div><div class="owl-next"><i class="fa fa-chevron-right" aria-hidden="true"></i></div></div><div class="owl-dots"><div class="owl-dot"><span></span></div><div class="owl-dot active"><span></span></div></div></div>
+        </div>
+    </div>
+</div>
+
+<script src="/Content/assets/lib/OwlCarousel2-2.2.1/dist/owl.carousel.min.js" type="text/javascript"></script>
+<script src="/Content/assets/js/Banner/bannerStart.js"></script>
+
+
+    </div>
+	
+	там есть еще такая штука которая сама включается и выключается
+	
+	
+	вот включено 
+	<div class="owl-item active" style="width: 451.733px; margin-right: 20px;"><div class="item item2">
+                    <div></div>
+                    <ul class="inner-contents">
+                        <li>
+                            <h3>
+                                <script type="text/javascript">
+                                             console.log(`Account balance - 1025.3`);
+                                </script>
+                                Balanţa contului: <span class="txt-color-positive">1025.30 MDL</span> &nbsp;
+                            </h3>
+                            <span class="txt-color-grey">la data 22.09.2026 la 09:50</span>
+                        </li>
+                        <li>
+                            <span class="button-topp">
+                                <button class="s-size" onclick="window.location.href=&quot;/payment/topup&quot;">Achită online</button>
+                            </span>
+                            <span class="s_20"></span>
+                            <div class="Message Message--orange">
+                                <div class="Message-icon">
+                                    <i class="icon icon-Warning-important"></i>
+                                </div>
+                                <div class="Message-body">
+                                    <p>La reîncărcarea contului online, prin My Orange, banii vor ajunge pe contul numărului. La reîncărcarea contului prin intermediul Magazinelor directe sau a Transferului bancar, banii vor ajunge în Balanţa contului companiei.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="m s_20"></span>
+                        </li>
+                    </ul>
+                </div></div>
+				
+				вот выключено
+				<div class="owl-item" style="width: 451.733px; margin-right: 20px;"><div class="item item2">
+                    <div></div>
+                    <ul class="inner-contents">
+                        <li>
+                            <h3>
+                                <script type="text/javascript">
+                                             console.log(`Account balance - 1025.3`);
+                                </script>
+                                Balanţa contului: <span class="txt-color-positive">1025.30 MDL</span> &nbsp;
+                            </h3>
+                            <span class="txt-color-grey">la data 22.09.2026 la 09:50</span>
+                        </li>
+                        <li>
+                            <span class="button-topp">
+                                <button class="s-size" onclick="window.location.href=&quot;/payment/topup&quot;">Achită online</button>
+                            </span>
+                            <span class="s_20"></span>
+                            <div class="Message Message--orange">
+                                <div class="Message-icon">
+                                    <i class="icon icon-Warning-important"></i>
+                                </div>
+                                <div class="Message-body">
+                                    <p>La reîncărcarea contului online, prin My Orange, banii vor ajunge pe contul numărului. La reîncărcarea contului prin intermediul Magazinelor directe sau a Transferului bancar, banii vor ajunge în Balanţa contului companiei.</p>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="m s_20"></span>
+                        </li>
+                    </ul>
+                </div></div>
+				
+				он там с другим элементом местами меняеться
+				
+				и нам надо тут тоже сделать валидацию
+				
+				Balance - 1252 - подходит для того у которого текст рядом   
+                                Balanţa numărului:
+                                
+								но там есть ,00 - с запятыми после основного числа
+								это надо тоже придумать как учитывать или не учитывать
+								
+								
+								и такой есть - 
+								
+								
+                 Account balance - 1025.3 - который на UI у нас рядом с текстом  Balanţa contului: 
+				 
+				 
+				 
+				 потом - Last invoice - 80
+				 
+				 тут он 80 MDL
+				 
+				 
+				 <div class="custom-dashboard margin_10_0_0_0" id="dashboard-widget-last-invoice" style="width:100%; height:96%;">
+        <ul class="inner-contents">
+            <li>
+                <h3>Factura</h3>
+            </li>
+            <li>
+                    <ul class="inv-c-tab">
+                        <li></li>
+                        <li>
+                            <script type="text/javascript">
+                                 console.log(`Last invoice - 80`);
+                            </script>
+                            <h1 class="txt-color-black">80 MDL</h1>
+                            <span class="txt-color-grey">Numărul facturii: 76865105</span>
+                            <br>
+                            <span class="txt-color-grey">Data emiterii: 01.08.2026</span>
+                        </li>
+                    </ul>
+            </li>
+            <li>
+                <button class="s-size" onclick="document.location.href=&quot;/invoices/invoicelist&quot;">Vezi istoricul facturilor</button>
+                    <button class="s-size" onclick="document.location.href=&quot;/invoices/invoicelist?page=verificationact&quot;">Act de verificare</button>
+            </li>
+            <li><img src="/Content/assets/img/calc.png" width="110px" alt="Delfin" data-gtm-vis-first-on-screen8676247_536="777" data-gtm-vis-first-on-screen8676247_456="938" data-gtm-vis-recent-on-screen8676247_456="1126" data-gtm-vis-total-visible-time8676247_456="100" data-gtm-vis-has-fired8676247_456="1" data-gtm-vis-recent-on-screen8676247_536="1140" data-gtm-vis-total-visible-time8676247_536="100" data-gtm-vis-has-fired8676247_536="1"></li>
+        </ul>
+    </div>
+	
+	
+	И НА ПОСЛЕДОК 
+	
+	Activated Option Name - Cine a sunat?
+	
+	<div class="custom-dashboard margin_10_0_0_0" id="dashboard-widget-ons" style="width:100%; height:96%;">
+
+        <h3>Opțiunile şi serviciile mele</h3>
+            <ul class="normal-circles">
+                        <li class="flex">
+                            <b>Roaming</b>
+                                <div class="status-badge active margin_0_0_0_10">
+                                    • Activat
+                                </div>
+                        </li>
+                        <script type="text/javascript">
+                         console.log(`Activated Option Name - Cine a sunat?`);
+                        </script>
+                        <li><b>Cine a sunat?</b></li>
+            </ul>
+    </div>
+	
+	
+	
+	в общем по тому что отображается в консоли - и тем локаторам что я тебе дал - тебе надо будет сделать ассерт валидацию что все верно отображается как в консоли - так и на сайте на  UI
+	сделай парсеры, выведи текст который подходит под это, после целого числа придумай как работать с ,00
+	
