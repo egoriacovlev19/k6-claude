@@ -2,7 +2,17 @@ import { test, expect } from '../../../../core/playwright/fixtures';
 import * as allure from 'allure-js-commons';
 import { readCases } from '../../../../core/data';
 import { LoginPage } from '../../pages/LoginPage';
+import { DashboardPage } from '../../pages/DashboardPage';
 import { appendSessionRecord } from '../../sessionLog';
+import {
+  parseConsoleLineNumbers,
+  parseAboName,
+  parseLineBalance,
+  parseAccountBalance,
+  parseLastInvoice,
+  parseActivatedOptionName,
+  parseUiAmount,
+} from '../../consoleChecks';
 import config from '../../project.config';
 
 // Тест-данные для входа — в data/pages.csv (колонки login,password). Путь передаётся
@@ -91,11 +101,83 @@ cases.forEach((data, index) => {
       await qa.attach('session-id', { login: data.login, password: data.password, sessionId });
     }, page);
 
-    await qa.step('Сверить данные из консоли с UI', async () => {
-      // Сообщения браузерной консоли за весь тест уже собраны в consoleMessages, по порядку.
-      // Дальше — разбор: найти нужное сообщение, распарсить и сверить с элементами страницы.
-      await qa.attach('console-messages', consoleMessages);
-      
+    // Дашборд сам пишет ключевые значения виджетов в консоль браузера при рендере —
+    // дальше сверяем их с тем, что реально показано на странице (DashboardPage).
+    const dashboardPage = new DashboardPage(page);
+    await qa.attach('console-messages', consoleMessages);
+
+    await qa.step('Сверить номера линий из консоли со списком в селекторе (не валит тест)', async () => {
+      await qa.measure('check.dashboard.lines', async () => {
+        const consoleLines = parseConsoleLineNumbers(consoleMessages);
+        const uiLines = await dashboardPage.openLineSelectorAndGetMsisdns();
+        const missingOnUi = consoleLines.filter(number => !uiLines.includes(number));
+        await qa.attach('lines-comparison', { consoleLines, uiLines, missingOnUi });
+        // По просьбе владельца проекта: расхождение тут — не повод ронять тест, только сигнал.
+        if (missingOnUi.length > 0) {
+          console.warn(`Номера из консоли отсутствуют в селекторе линий на UI: ${missingOnUi.join(', ')}`);
+        }
+      });
+    }, page);
+
+    await qa.step('Сверить тариф (Abo name) из консоли с виджетом Plan tarifar', async () => {
+      await qa.measure('check.dashboard.planName', async () => {
+        const consoleName = parseAboName(consoleMessages);
+        const uiName = await dashboardPage.planNameText();
+        await qa.attach('plan-name-comparison', { consoleName, uiName });
+
+        expect(consoleName, 'В консоли должно быть сообщение с названием тарифа (Abo name - ...)').not.toBeNull();
+        expect(uiName, 'Название тарифа на UI должно совпадать с консолью').toBe(consoleName);
+      });
+    }, page);
+
+    await qa.step('Сверить баланс номера из консоли с виджетом Balanţa numărului', async () => {
+      await qa.measure('check.dashboard.lineBalance', async () => {
+        const consoleBalance = parseLineBalance(consoleMessages);
+        const uiText = await dashboardPage.lineBalanceText();
+        const uiBalance = parseUiAmount(uiText);
+        await qa.attach('line-balance-comparison', { consoleBalance, uiText, uiBalance });
+
+        expect(consoleBalance, 'В консоли должно быть сообщение с балансом номера (Balance - ...)').not.toBeNull();
+        expect(uiBalance, `Не удалось распознать баланс номера на UI: "${uiText}"`).not.toBeNull();
+        expect(uiBalance, 'Баланс номера на UI должен совпадать с консолью').toBe(consoleBalance);
+      });
+    }, page);
+
+    await qa.step('Сверить баланс счёта из консоли с виджетом Balanţa contului', async () => {
+      await qa.measure('check.dashboard.accountBalance', async () => {
+        const consoleBalance = parseAccountBalance(consoleMessages);
+        const uiText = await dashboardPage.accountBalanceText();
+        const uiBalance = parseUiAmount(uiText);
+        await qa.attach('account-balance-comparison', { consoleBalance, uiText, uiBalance });
+
+        expect(consoleBalance, 'В консоли должно быть сообщение с балансом счёта (Account balance - ...)').not.toBeNull();
+        expect(uiBalance, `Не удалось распознать баланс счёта на UI: "${uiText}"`).not.toBeNull();
+        expect(uiBalance, 'Баланс счёта на UI должен совпадать с консолью').toBe(consoleBalance);
+      });
+    }, page);
+
+    await qa.step('Сверить сумму последнего счёта из консоли с виджетом Factura', async () => {
+      await qa.measure('check.dashboard.lastInvoice', async () => {
+        const consoleAmount = parseLastInvoice(consoleMessages);
+        const uiText = await dashboardPage.lastInvoiceText();
+        const uiAmount = parseUiAmount(uiText);
+        await qa.attach('last-invoice-comparison', { consoleAmount, uiText, uiAmount });
+
+        expect(consoleAmount, 'В консоли должно быть сообщение с суммой последнего счёта (Last invoice - ...)').not.toBeNull();
+        expect(uiAmount, `Не удалось распознать сумму счёта на UI: "${uiText}"`).not.toBeNull();
+        expect(uiAmount, 'Сумма последнего счёта на UI должна совпадать с консолью').toBe(consoleAmount);
+      });
+    }, page);
+
+    await qa.step('Сверить активную опцию из консоли с виджетом опций и услуг', async () => {
+      await qa.measure('check.dashboard.activeOption', async () => {
+        const consoleOptionName = parseActivatedOptionName(consoleMessages);
+        const uiOptionNames = await dashboardPage.activeOptionNamesList();
+        await qa.attach('active-option-comparison', { consoleOptionName, uiOptionNames });
+
+        expect(consoleOptionName, 'В консоли должно быть сообщение об активной опции (Activated Option Name - ...)').not.toBeNull();
+        expect(uiOptionNames, 'Опция из консоли должна быть среди опций на UI').toContain(consoleOptionName);
+      });
     }, page);
 
     await qa.step('Сохранить загрузку документа и адрес после перенаправления', async () => {
